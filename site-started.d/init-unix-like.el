@@ -55,14 +55,32 @@
 ;; セッション。
 (require 'init-session)
 
+;; highlight line。
+(require 'init-hl-line)
+
 ;; Yasnippet。
 (require 'init-yasnippet)
+
+;; markdown 用。
+(require 'init-markdown)
 
 ;; Ruby 用。
 (require 'init-ruby)
 
+;; htmlize 用。
+(require 'init-htmlize)
+
 ;; C 言語ファミリー用。
 (require 'init-c-common)
+
+;; anything 用。
+(require 'init-anything)
+
+;; SGML 用。
+(require 'init-sgml)
+
+;; zencoding 用。
+(require 'init-zencoding)
 
 (provide 'init-unix-like)
 ;; init-unix-like.el ends here

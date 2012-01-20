@@ -25,8 +25,8 @@
 (setq color-theme-libraries nil)
 
 (lazyload (color-theme-initialize) "color-theme"
-          (require'bright-forest)
-          (color-theme-bright-forest))
+          (require 'color-theme-ntemacs-like)
+          (color-theme-ntemacs-like))
 (color-theme-initialize)
 
 (provide 'init-color-theme)
