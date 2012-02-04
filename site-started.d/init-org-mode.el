@@ -21,11 +21,11 @@
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
 (setq org-directory "~/var/memo")
+(push '("\\.org$" . org-mode) auto-mode-alist)
 
 (require-if-exists org-mode
                    (setq org-startup-truncated nil)
                    (setq org-return-follows-link t)
-                   (push 'auto-mode-alist '("\\.org$" . org-mode))
                    ;;(org-remember-insinuate)
                    (setq org-export-default-language "ja")
                    (setq org-default-notes-file (concat org-directory "/agenda.org"))
@@ -41,7 +41,9 @@
                    (set-face-foreground 'org-level-5 "#6a40ad")
                    (set-face-foreground 'org-level-6 "#8c3e13")
 
-                   (set-face-attribute 'org-document-title nil  :height 1.0))
+                   (set-face-attribute 'org-document-title nil
+                                       :height 1.0
+                                       :weight 'bold))
 
 (provide 'init-org-mode)
 ;; init-org-mode.el ends here

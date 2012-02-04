@@ -23,8 +23,6 @@
 
 (setq x-select-enable-clipboard t)
 
-
-
 ;; ディスプレイ。
 (require 'init-display)
 
@@ -75,6 +73,9 @@
 
 ;; anything 用。
 (require 'init-anything)
+
+;; org-mode 用。
+(require 'init-org-mode)
 
 ;; SGML 用。
 (require 'init-sgml)

@@ -22,10 +22,10 @@
 
 (lazyload (espresso-mode) "espresso")
 
-(push '("\\.js$" . js2-mode) 'auto-mode-alist)
+(push '("\\.js$" . js2-mode) auto-mode-alist)
 
-(add-hook-lambda 'js2-mode-hook 
-                 (require-if-exists 'espresso)
+(add-hook-lambda js2-mode-hook 
+                 (require-if-exists espresso)
                  (setq espresso-indent-level 4
                        ;; 保存時に行末の空白を削除しません。
                        js2-cleanup-white-space nil

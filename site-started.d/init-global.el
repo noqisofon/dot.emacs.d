@@ -107,7 +107,6 @@
                       '(progn
                         ,@body))))
 
-
 ;;; emacsclient:
 ;; emacsclient を起動するためにサーバを起動します。
 (require 'server)
@@ -306,8 +305,6 @@
     (or load-status
         (message (format "[load-safe] failed %s" load-lib)))
     load-status))
-
-
 
 ;;; Fringe
 (setq-default indicate-buffer-boundaries 'left)
