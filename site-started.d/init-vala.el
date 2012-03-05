@@ -1,6 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
 
-;; init-ecmascript.el -- Emacs init setting elisp file
+;; init-vala.el -- Emacs init setting elisp file
 
 ;; Copyright (c) 2009-2012 ned rihine
 
@@ -20,9 +20,9 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(push '("\\.es$" . ecmascript-mode) auto-mode-alist)
+(push '("\\.vala$" . vala-mode) auto-mode-alist)
 
-(require-if-exists ecmascript-mode)
+(require-if-exists vala-mode)
 
-(provide 'init-ecmascript)
+(provide 'init-vala)
 ;; init-ecmascript.el ends here

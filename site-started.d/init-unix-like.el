@@ -59,11 +59,8 @@
 ;; Yasnippet。
 (require 'init-yasnippet)
 
-;; markdown 用。
-(require 'init-markdown)
-
-;; Ruby 用。
-(require 'init-ruby)
+;; anything 用。
+(require 'init-anything)
 
 ;; htmlize 用。
 (require 'init-htmlize)
@@ -71,17 +68,29 @@
 ;; C 言語ファミリー用。
 (require 'init-c-common)
 
-;; anything 用。
-(require 'init-anything)
-
 ;; org-mode 用。
 (require 'init-org-mode)
 
 ;; SGML 用。
 (require 'init-sgml)
 
+;; markdown 用。
+(require 'init-markdown)
+
+;; Ruby 用。
+(require 'init-ruby)
+
+;; ecmascript 用。
+(require 'init-ecmascript)
+
+;; ecmascript 用。
+(require 'init-vala)
+
 ;; zencoding 用。
 (require 'init-zencoding)
+
+;; emacsclient 用。
+(require 'init-emacsclient)
 
 (provide 'init-unix-like)
 ;; init-unix-like.el ends here

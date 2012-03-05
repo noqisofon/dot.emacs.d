@@ -39,6 +39,9 @@
 ;; キー入力を記憶しておきます。
 (open-dribble-file "~/.emacs_dribble")
 
+;; 他のソフトで保存した内容を自動的に読み込み直します。
+(global-auto-revert-mode 1)
+
 ;; モードラインに行数、カラム数を表示します。
 (line-number-mode t)
 (column-number-mode t)
