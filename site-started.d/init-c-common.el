@@ -33,8 +33,9 @@
  (setq tab-width 4)
  ;; インデントを tab-width と同じにします。
  (setq c-indent-level tab-width)
- ;; コメントだけの行も c-basic-offset だけインデントします。
- (setq c-comment-only-line-offset '(4 . 4))
+ ;; コメントだけの行は 0 にしておきます。
+ ;; こうすると、コメントだけ一番下に下がってしまいます。
+ (setq c-comment-only-line-offset 0)
 
  ;; 引数リストの閉じ括弧もインデントします。
  (c-set-offset 'arglist-close 0)

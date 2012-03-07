@@ -171,8 +171,8 @@
                               interval (1- n))))))
 
 ;; タブ文字による空白を 4 つにします。
-(setq-default default-tab-width 4
-              tab-width default-tab-width
+(setq-default *default-tab-width* 4
+              tab-width *default-tab-width*
               tab-stop-list (progression 4 4 120))
 
 ;; 通常のインデントで半角スペースを使います。
