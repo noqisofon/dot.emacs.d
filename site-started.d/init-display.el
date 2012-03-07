@@ -44,10 +44,12 @@
     ;; else
     (add-to-list 'default-frame-alist '(cursor-type . bar))))
 
+(defun )
+
 (cond
  ((find-font (font-spec :family "Ricty"))
   (let* ((fontset-name "ricty")
-         (size 10)
+         (size 13)
          (ascii-font "Ricty")
          (multibyte-font "Ricty")
          (h (* size 10))
