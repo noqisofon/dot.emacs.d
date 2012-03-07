@@ -18,7 +18,7 @@
 ;;  GNU General Public License for more details.
 
 ;;  You should have received a copy of the GNU General Public License
-;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
+;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 ;; csharp-mode はクソなので、vala-mode を使用します。

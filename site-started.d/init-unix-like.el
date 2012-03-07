@@ -26,6 +26,9 @@
 ;; ディスプレイ。
 (require 'init-display)
 
+;; モードライン。
+(require 'init-modeline)
+
 ;; recentf。
 (require 'init-recentf)
 

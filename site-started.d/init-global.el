@@ -84,7 +84,7 @@
 
 
 (defmacro global-set-key-lambda (key args &rest body)
-  "lambda を書かずに関数をそのまま書くことができる global-set-key です。lambda を書かずに関数をそのまま書くことができる global-set-key です。"
+  "lambda を書かずに関数をそのまま書くことができる global-set-key です。"
   `(global-set-key ,key (lambda ,args ,@body)))
 
 (defmacro append-to-list (to list)
@@ -118,7 +118,7 @@
 
 
 ;; 現在選択中のバッファがファイルからできているかどうか判別します。
-(defun is-selected-buffer-from-file ()
+(defun selected-buffer-from-file-p ()
   "現在選択中のバッファがファイルからできているかどうか判別します。"
   (let ((selected-buffer-filename (buffer-file-name))
         (selected-buffer-name (buffer-name)))
@@ -132,7 +132,7 @@
                               (first-hyphen (string-match "-" meadow-about-text)))
                          (store-substring meadow-about-text first-hyphen " ")))
     (setq frame-title-format
-          (list (if (is-selected-buffer-from-file) "%f" "%b") " - " about-meadow "@" (system-name))))
+          (list (if (selected-buffer-from-file-p) "%f" "%b") " - " about-meadow "@" (system-name))))
   ;; とりあえずタイトル更新。
   (update-title-caption))
 
@@ -262,7 +262,7 @@
 (global-set-key (kbd "C-c t") 'create-temporary-buffer)
 
 ;; *scratch* バッファは簡単な処理に便利なバッファです。
-;; しかし，そのバッファの内容を 別名で保存したり、kill したりすると，*scratch*バッファが消えてしまい，また作らないといけません。
+;; しかし，そのバッファの内容を 別名で保存したり、kill したりすると，*scratch* バッファが消えてしまい，また作らないといけません。
 ;; 面倒です。 
 ;; そこで，以下のような設定が便利です。これを入れておくと、*scratch*バッファを C-x C-s で保存時には *scratch* バッファを作成してくれます。
 ;; また，C-x k で kill すると，*scratch*バッファの内容をすべて消してくれます。 非常に便利です。
@@ -296,7 +296,8 @@
                         (bookshelf-make-scratch 1)))))
 
 
-;; カーソル位置のフェースを調べる関数です。(via: http://d.hatena.ne.jp/whitypig/20090401/1238553652)
+;; カーソル位置のフェースを調べる関数です。
+;; (via: http://d.hatena.ne.jp/whitypig/20090401/1238553652)
 (defun describe-face-at-point ()
   "Return face used at point."
   (interactive)
