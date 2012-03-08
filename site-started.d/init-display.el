@@ -44,48 +44,30 @@
     ;; else
     (add-to-list 'default-frame-alist '(cursor-type . bar))))
 
-(defun setting-font (font-name)
-  (let* ((fontset-name font-name)
-         (size 13)
-         (ascii-font font-name)
-         (multibyte-font font-name)
-         (h (* size 10))
-         (font (format "%s-%d:weight=normal:slant=normal" ascii-font size))
-         (ascii-fontspec (font-spec :family ascii-font))
-         (multibyte-fontspec (font-spec :family multibyte-font))
-         (fontset (create-fontset-from-ascii-font font nil fontset-name)))
-    (set-face-attribute 'default nil :family ascii-font)
-    (set-fontset-font fontset 'japanese-jisx0213.2004-1 multibyte-fontspec)
-    (set-fontset-font fontset 'japanese-jisx0213-2 multibyte-fontspec)
-    (set-fontset-font fontset 'katakana-jisx0201 multibyte-fontspec) ; 半角カナ
-    (set-fontset-font fontset '(#x0080 . #x024F) ascii-fontspec)     ; 分音符付きラテン
-    (set-fontset-font fontset '(#x0370 . #x03FF) ascii-fontspec)     ; ギリシャ文字
-    ))
-
-(cond
- ((find-font (font-spec :family "Ricty"))
-  (setting-font "Ricty"))
-
- ((find-font (font-spec :family "TakaoGothic"))
-  (setting-font "TakaoGothic"))
-
- ((find-font (font-spec :family "IPAGothic"))
-  (setting-font "IPAGothic")))
-
-;; デフォルトのフレームパラメータでフォンとセットを指定します。
-;;(add-to-list 'default-frame-alist '(font . "fontset-takao-gothic"))
-
-;; (if *macosx-p*
-;;     ;; フォントサイズの比を指定します。
-;;     (dolist (elt '(("^-apple-hiragino.*" . 1.2)
-;;                    (".*osaka-bold.*" 1.2)
-;;                    (".*osaka-medium.*" 1.2)
-;;                    (".*courier-bold.*" 1.0)
-;;                    (".*monaco cy-bold-.*-mac-cyrillic" 0.9)
-;;                    (".*monaco-bold-.*-mac-roman" 0.9)))
-;;       (add-to-list 'face-font-rescale-alist elt)))
-
-;;(set-face-font 'default "fontset-takao-gothic")
+(when (>= emacs-major-version 23)
+  (set-face-attribute 'default nil
+                      :family "ricty"
+                      :height 140)
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'japanese-jisx0208
+   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'japanese-jisx0212
+   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'mule-unicode-0100-24ff
+   '("monaco" . "iso10646-1"))
+  (setq face-font-rescale-alist
+        '(("^-apple-hiragino.*" . 1.2)
+          (".*osaka-bold.*" . 1.2)
+          (".*osaka-medium.*" . 1.2)
+          (".*courier-bold-.*-mac-roman" . 1.0)
+          (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+          (".*monaco-bold-.*-mac-roman" . 0.9)
+          ("-cdac$" . 1.3))))
 
 ;; 行末の空白を表示しません(ウザいので)。
 ;(setq-default show-trailing-whitespace nil)
