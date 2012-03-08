@@ -24,6 +24,9 @@
 (setq hl-line-face 'underline)
 (global-hl-line-mode)
 
+;; 標準の hl-line だと結構邪魔なので拡張機能に変更。
+(require-if-exists hl-line+)
+
 (defface hlline-face
          '((((class color)
              (background dark))
