@@ -4,7 +4,35 @@
 ;; Copyright (C) 2004, 2005 Matt Strange
 ;; Copyright (C) 2010 Nathaniel Flath
 
+;; Author: Nathaniel Flath <flat0103@gmail.com>
+;; URL: http://github.com/nflath/c-eldoc
+;; Version: 0.6
+
 ;; This file is NOT a part of GNU Emacs
+
+;;; Commentary:
+
+;; To enable: put the following in your .emacs file:
+;;
+;; (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+
+;; Chinmay Kamat -- made changes to the regular expression to make sure that function calls in macros do not
+;; override actual function definitions while searching
+;; v0.6 20/05/2010
+
+;; Nathaniel has submitted a caching patch to make this workable on large projects "like the emacs
+;; codebase"
+;; v0.5 01/02/2010
+
+;; Provides helpful description of the arguments to C functions.
+;; Uses child process grep and preprocessor commands for speed.
+;; v0.4 01/16/2005
+
+;; Your improvements are appreciated: I am no longer maintaining this code
+;; m_strange at mail dot utexas dot edu.  Instead, direct all requests to
+;; flat0103@gmail.com
+
+;;; License:
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -21,24 +49,6 @@
 ;; Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 ;; USA
 
-;;; Commentary:
-
-;; To enable: put the following in your .emacs file:
-;; 
-;; (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-
-;; Nathaniel has submitted a caching patch to make this workable on large projects "like the emacs
-;; codebase"
-;; v0.5 01/02/2010
-
-;; Provides helpful description of the arguments to C functions.
-;; Uses child process grep and preprocessor commands for speed.
-;; v0.4 01/16/2005
-
-;; Your improvements are appreciated: I am no longer maintaining this code
-;; m_strange at mail dot utexas dot edu.  Instead, direct all requests to
-;; flat0103@gmail.com
-
 ;;; Code:
 
 (require 'eldoc)
@@ -51,7 +61,8 @@
 (eldoc-add-command 'c-electric-paren)
 
 ;;if cache.el isn't loaded, define the cache functions
-(unless (fboundp 'cache-make-cache)
+(if (locate-library "cache")
+    (require 'cache)
   (defun* cache-make-cache (init-fun test-fun cleanup-fun
                                      &optional &key
                                      (test #'eql)
@@ -102,19 +113,18 @@ to the created hash table."
                   (funcall (cadddr cache) val)
                   nil)
               val)))))
-   
+
   (defun cache-puthash (key val cache)
     "Puts the key-val pair into cache."
     (puthash key
              (cons val (funcall (cadr cache)))
              (car cache))))
-         
 
 ;; if you've got a non-GNU preprocessor with funny options, set these
 ;; variables to fix it
 (defvar c-eldoc-cpp-macro-arguments "-dD -w -P")
 (defvar c-eldoc-cpp-normal-arguments "-w -P")
-(defvar c-eldoc-cpp-command "/lib/cpp ")
+(defvar c-eldoc-cpp-command "/usr/bin/cpp ")
 (defvar c-eldoc-includes
   "`pkg-config gtk+-2.0 --cflags` -I./ -I../ "
   "List of commonly used packages/include directories - For
@@ -124,7 +134,6 @@ to the created hash table."
 (defvar c-eldoc-reserved-words
   (list "if" "else" "switch" "while" "for" "sizeof")
   "List of commands that eldoc will not check.")
-
 
 (defvar c-eldoc-buffer-regenerate-time
   120
@@ -140,6 +149,10 @@ T1 and T2 are time values (as returned by `current-time' for example)."
   "Returns whether or not old-time is less than c-eldoc-buffer-regenerate-time seconds ago."
   (> (c-eldoc-time-diff (current-time) old-time) c-eldoc-buffer-regenerate-time))
 
+(defun call-c-eldoc-cleanup ()
+  (if (eq major-mode 'c-mode)
+      (ignore-errors (c-eldoc-cleanup (concat "*" buffer-file-name "-preprocessed*")))))
+
 (defun c-eldoc-cleanup (preprocessed-buffer)
   (kill-buffer preprocessed-buffer))
 
@@ -147,12 +160,16 @@ T1 and T2 are time values (as returned by `current-time' for example)."
   (cache-make-cache #'current-time #'c-eldoc-time-difference #'c-eldoc-cleanup)
   "Cache of buffer->preprocessed file used to speed up finding arguments")
 
+;;;###autoload
 (defun c-turn-on-eldoc-mode ()
   "Enable c-eldoc-mode"
   (interactive)
   (set (make-local-variable 'eldoc-documentation-function)
        'c-eldoc-print-current-symbol-info)
-  (turn-on-eldoc-mode))
+  (turn-on-eldoc-mode)
+  (add-hook 'c-mode-hook
+	  '(lambda ()
+	     (add-hook 'kill-buffer-hook 'call-c-eldoc-cleanup))))
 
 ;; call the preprocessor on the current file
 ;;
@@ -170,7 +187,6 @@ T1 and T2 are time values (as returned by `current-time' for example)."
                                            buffer-file-name))
              (cur-buffer (current-buffer))
              (output-buffer (generate-new-buffer this-name)))
-        (bury-buffer output-buffer)
         (call-process-shell-command preprocessor-command nil output-buffer nil)
         ;; run the second time for normal functions
         (setq preprocessor-command (concat c-eldoc-cpp-command " "
@@ -235,12 +251,13 @@ T1 and T2 are time values (as returned by `current-time' for example)."
                              '(face bold) arguments))
       arguments)))
 
+;;;###autoload
 (defun c-eldoc-print-current-symbol-info ()
-  "Returns documentation string for the current symbol." 
+  "Returns documentation string for the current symbol."
   (let* ((current-function-cons (c-eldoc-function-and-argument (- (point) 1000)))
          (current-function (car current-function-cons))
-         (current-function-regexp (concat "[ \t\n]+[*]*" current-function "[ \t\n]*("))
-         (current-macro-regexp (concat "#define[ \t\n]+[*]*" current-function "[ \t\n]*("))
+         (current-function-regexp (concat "[ \t\n]*[0-9a-zA-Z]+[ \t\n]+" current-function "[ \t\n]*("))
+         (current-macro-regexp (concat "#define[ \t\n]+" current-function "[ \t\n]*("))
          (current-buffer (current-buffer))
          (tag-buffer)
          (function-name-point)

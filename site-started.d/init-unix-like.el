@@ -26,6 +26,9 @@
 ;; ディスプレイ。
 (require 'init-display)
 
+;; emacsclient 用。
+(require 'init-emacsclient)
+
 ;; モードライン。
 (require 'init-modeline)
 
@@ -46,6 +49,15 @@
 
 ;; キーバインド。
 (require 'init-keybind)
+
+;; タイムスタンプ。
+(require 'init-time-stamp)
+
+;; eldoc。
+(require 'init-eldoc)
+
+;; C 用の eldoc。
+(require 'init-c-eldoc)
 
 ;; タイムスタンプ。
 (require 'time-stamp)
@@ -71,6 +83,24 @@
 ;; C 言語ファミリー用。
 (require 'init-c-common)
 
+;; Smalltalk 用。
+(require 'init-smalltalk)
+
+;; ecmascript 用。
+(require 'init-ecmascript)
+
+;; vala 用。
+(require 'init-vala)
+
+;; C# 用。
+(require 'init-csharp)
+
+;; D 用。
+(require 'init-d)
+
+;; Ruby 用。
+(require 'init-ruby)
+
 ;; org-mode 用。
 (require 'init-org-mode)
 
@@ -80,20 +110,11 @@
 ;; markdown 用。
 (require 'init-markdown)
 
-;; Ruby 用。
-(require 'init-ruby)
-
-;; ecmascript 用。
-(require 'init-ecmascript)
-
-;; ecmascript 用。
-(require 'init-vala)
+;; yaml 用。
+(require 'init-yaml)
 
 ;; zencoding 用。
 (require 'init-zencoding)
-
-;; emacsclient 用。
-(require 'init-emacsclient)
 
 (provide 'init-unix-like)
 ;; init-unix-like.el ends here
