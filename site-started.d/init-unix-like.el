@@ -30,7 +30,7 @@
 (require 'init-emacsclient)
 
 ;; auto-insert 用。
-(require 'init-auto-insert)
+(require 'init-autoinsert)
 
 ;; モードライン。
 (require 'init-modeline)
@@ -103,6 +103,12 @@
 
 ;; Ruby 用。
 (require 'init-ruby)
+
+;; Scala 用。
+(require 'init-scala)
+
+;; clojure 用。
+(require 'init-clojure)
 
 ;; org-mode 用。
 (require 'init-org-mode)

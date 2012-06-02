@@ -21,13 +21,15 @@
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
 ;; スニペットの位置を設定します。
-(setq yas/root-directory (concat user-emacs-directory "share/snippets"))
-;;(setq yas/root-directory '("~/.emacs.d/site-lisp/yasnippet/snippets"))
+(let ((snippet-path (concat user-emacs-directory "share/snippets")))
+  (if (boundp 'yas/snippet-dirs)
+      (push snippet-path yas/snippet-dirs)
+    (setq yas/snippet-dirs (list snippet-path))))
 
-(require-if-exists yasnippet ;; not yasnippet-bundle
+(require-if-exists yasnippet
                    (yas/initialize)
-                   ;;(mapc 'yas/load-directory yas/root-directory)
-                   (yas/load-directory yas/root-directory))
+                   (yas/load-directory (car yas/snippet-dirs)))
+
 
 (provide 'init-yasnippet)
 ;; init-yasnippet.el ends here
