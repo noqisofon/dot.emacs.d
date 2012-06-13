@@ -20,6 +20,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
+(defvar org-directory "")
+
 (require-if-exists anything-config
                    (setq anything-sources (list anything-c-source-buffers
                                                 anything-c-source-bookmarks

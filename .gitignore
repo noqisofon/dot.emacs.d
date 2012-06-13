@@ -1,7 +1,9 @@
+# -*- coding: utf-8; -*-
 *~
 \#*#
 
 *.elc
 
 auto-save-list/
+elpa/
 private/

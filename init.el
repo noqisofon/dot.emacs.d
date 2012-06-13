@@ -111,37 +111,39 @@
 (set-language-environment "utf-8")
 
 ;;; Char code:
-;; (if *windows-p*
-;;     (let ((default-coding 'japanese-shift-jis-dos)
-;;           (clipboard-coding 'utf-16le-dos))
-;;       ;; 
-;;       (if (foundp 'set-w32-system-coding-system)
-;;           (set-w32-system-coding-system default-coding))
-;;       ;; デフォルトの文字コードです。
-;;       (if (fboundp 'set-default-coding-system)
-;;           (set-default-coding-system default-coding))
-;;       ;; 端末の文字コードです。
-;;       (set-terminal-coding-system default-coding)
-;;       ;; Windows NT の内部文字コードは UTF-16LE なので、クリップボードのエンコードを utf-16le-dos にしておきます。
-;;       (set-clipboard-coding-system clipboard-coding)
-;;       ;; 通常キーボードを使用して打つ文字です。
-;;       (set-keyboard-coding-system default-coding)
-;;       ;; 新規作成するバッファのエンコードです。
-;;       (prefer-coding-system 'default-coding))
-;;   ;; else
-;;     (let ((default-coding 'utf-8-unix))
-;;       (if (fboundp 'set-default-coding-system)
-;;           (set-default-coding-system default-coding))
-;;       (set-terminal-coding-system default-coding)
-;;       (set-clipboard-codng-system default-coding)
-;;       (prefer-coding-system-coding default-coding)))
-(cond
- (*windows-nt-p*
-  (setq file-name-coding-system 'sjis)
-  (setq locale-coding-system 'utf-8))
- (t
-  (setq file-name-coding-system 'utf-8)
-  (setq locale-coding-system 'utf-8)))
+(if *windows-p*
+    (let ((default-coding 'japanese-shift-jis-dos)
+          (clipboard-coding 'utf-16le-dos))
+      ;; 
+      (if (foundp 'set-w32-system-coding-system)
+          (set-w32-system-coding-system default-coding))
+      ;; デフォルトの文字コードです。
+      (if (fboundp 'set-default-coding-system)
+          (set-default-coding-system default-coding))
+      ;; 端末の文字コードです。
+      (set-terminal-coding-system default-coding)
+      ;; Windows NT の内部文字コードは UTF-16LE なので、クリップボードのエンコードを utf-16le-dos にしておきます。
+      (set-clipboard-coding-system clipboard-coding)
+      ;; 通常キーボードを使用して打つ文字です。
+      (set-keyboard-coding-system default-coding)
+      ;; 新規作成するバッファのエンコードです。
+      (prefer-coding-system 'default-coding))
+  ;; else
+  (let ((default-coding 'utf-8-unix))
+    (if (fboundp 'set-default-coding-system)
+        (set-default-coding-system default-coding))
+    (set-terminal-coding-system default-coding)
+    (if (fboundp 'set-clipboard-codng-system)
+        (set-clipboard-codng-system default-coding))
+    (if (fboundp 'prefer-coding-system-coding)
+        (prefer-coding-system-coding default-coding))))
+;; (cond
+;;  (*windows-nt-p*
+;;   (setq file-name-coding-system 'sjis)
+;;   (setq locale-coding-system 'utf-8))
+;;  (t
+;;   (setq file-name-coding-system 'utf-8)
+;;   (setq locale-coding-system 'utf-8)))
 
 ;; 全環境共通設定を読み込みます。
 (require 'init-global)
