@@ -4,6 +4,8 @@
 
 *.elc
 
+tramp
+
 auto-save-list/
 elpa/
 private/

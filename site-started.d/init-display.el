@@ -28,7 +28,7 @@
                '(left . 5))
               default-frame-alist))
 
-(setq *frame-alpha* 85)
+(setq *frame-alpha* 95)
 
 (if *meadow3-p*
     (set-frame-parameter nil 'alpha *frame-alpha*)

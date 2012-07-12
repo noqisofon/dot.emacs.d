@@ -55,5 +55,5 @@
 
 (add-hook 'find-file-not-found-hooks 'auto-insert)
 
-(provide 'init-autoinsert)
+(provide 'init-auto-insert)
 ;; init-auto-insert.el ends here

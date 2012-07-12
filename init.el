@@ -62,6 +62,9 @@
 (defvar *emacs23-p*
   (and (equal emacs-major-version 23)
        (null (featurep 'xemacs))))
+(defvar *emacs24-p*
+  (and (equal emacs-major-version 24)
+       (null (featurep 'xemacs))))
 
 (defvar *linux-p* (equal system-type 'gnu/linux))
 
@@ -115,7 +118,7 @@
     (let ((default-coding 'japanese-shift-jis-dos)
           (clipboard-coding 'utf-16le-dos))
       ;; 
-      (if (foundp 'set-w32-system-coding-system)
+      (if (fboundp 'set-w32-system-coding-system)
           (set-w32-system-coding-system default-coding))
       ;; デフォルトの文字コードです。
       (if (fboundp 'set-default-coding-system)
@@ -181,19 +184,4 @@
                    (+ (third before-init-time) (* 1000000 (second before-init-time))))
                 1000)))
   (add-hook 'after-init-hook 'present-startup-time))
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(display-time-mode t)
- '(session-use-package t nil (session))
- '(show-paren-mode t)
- '(tool-bar-mode nil))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(org-document-title ((((class color) (background light)) (:foreground "midnight blue" :weight bold :height 1.0)))))
+

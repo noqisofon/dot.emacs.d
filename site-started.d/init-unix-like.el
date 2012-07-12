@@ -30,7 +30,7 @@
 (require 'init-emacsclient)
 
 ;; auto-insert 用。
-(require 'init-autoinsert)
+(require 'init-auto-insert)
 
 ;; モードライン。
 (require 'init-modeline)
