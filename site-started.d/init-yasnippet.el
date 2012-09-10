@@ -22,13 +22,14 @@
 
 ;; スニペットの位置を設定します。
 (let ((snippet-path (concat user-emacs-directory "share/snippets")))
-  (if (boundp 'yas/snippet-dirs)
+  (if (boundp 'yas/snippet-dir)
       (push snippet-path yas/snippet-dirs)
-    (setq yas/snippet-dirs (list snippet-path))))
+    (setq yas-snippet-dirs (list snippet-path))))
 
 (require-if-exists yasnippet
-                   (yas/initialize)
-                   (yas/load-directory (car yas/snippet-dirs)))
+                   ;;(yas/initialize)
+                   (yas-global-mode 1)
+                   (yas-load-directory (car yas-snippet-dirs)))
 
 
 (provide 'init-yasnippet)

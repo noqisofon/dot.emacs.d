@@ -86,6 +86,9 @@
 ;; C 言語ファミリー用。
 (require 'init-c-common)
 
+;; Objective-C 用。
+(require 'init-objc)
+
 ;; Smalltalk 用。
 (require 'init-smalltalk)
 
@@ -116,11 +119,23 @@
 ;; SGML 用。
 (require 'init-sgml)
 
+;; CMake 用。
+(require 'init-cmake)
+
 ;; markdown 用。
 (require 'init-markdown)
 
 ;; yaml 用。
 (require 'init-yaml)
+
+;; haml 用。
+(require 'init-haml)
+
+;; sass 用。
+(require 'init-sass)
+
+;; coffeescript 用。
+(require 'init-coffee)
 
 ;; zencoding 用。
 (require 'init-zencoding)

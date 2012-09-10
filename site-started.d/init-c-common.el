@@ -25,14 +25,22 @@
  (c-set-style "cc-mode")
  ;; インデントは空白文字で行ないます。
  (setq indent-tabs-mode nil)
- ;; `;' を押すと自動で改行されるようにします。
+ ;; `;' を押すと自動で改行されないようにします。
  (setq c-auto-newline nil)
  ;; タブキーでインデントを行います。
  (setq c-tab-always-indent t)
  ;; タブ幅を 4 にします。
  (setq tab-width 4)
- ;; インデントを tab-width と同じにします。
+ ;; ブロック内の文の字下げを指定します。
  (setq c-indent-level tab-width)
+ ;; if 文の then 節や while 文の本体の様に、文の中で始まる文に加える字下げの数を指定します。
+ (setq c-continued-statement-offset tab-width)
+ ;; 開き中カッコで始まる行に加える字下げの数を指定します。
+ (setq c-brace-offset tab-width)
+ ;; 関数の引数宣言の字下げを指定します。
+ (setq c-argdecl-indent tab-width)
+ ;; ラベルや case、default のある文に加える字下げの数を指定します。
+ (setq c-label-offset 0)
  ;; コメントだけの行は 0 にしておきます。
  ;; こうすると、コメントだけ一番下に下がってしまいます。
  (setq c-comment-only-line-offset 0)
