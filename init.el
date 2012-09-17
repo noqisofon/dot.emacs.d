@@ -130,7 +130,7 @@
       ;; 通常キーボードを使用して打つ文字です。
       (set-keyboard-coding-system default-coding)
       ;; 新規作成するバッファのエンコードです。
-      (prefer-coding-system 'default-coding))
+      (prefer-coding-system default-coding))
   ;; else
   (let ((default-coding 'utf-8-unix))
     (if (fboundp 'set-default-coding-system)
