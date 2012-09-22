@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-unix-like.el -- Emacs init setting elisp file
 
@@ -139,6 +139,9 @@
 
 ;; zencoding 用。
 (require 'init-zencoding)
+
+;; Git 用。
+(require 'init-magit)
 
 (provide 'init-unix-like)
 ;; init-unix-like.el ends here
