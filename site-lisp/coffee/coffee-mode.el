@@ -25,31 +25,105 @@
 
 ;;; Commentary
 
-;; For commentary please see the README.md or
-;; http://github.com/defunkt/coffee-mode#readme
+;; Provides syntax highlighting, indentation support, imenu support,
+;; a menu bar, and a few cute commands.
 
-;;; Installation
+;; ## Indentation
 
-;; In your shell:
+;; ### TAB Theory
 
-;;     $ cd ~/.emacs.d/vendor
-;;     $ git clone git://github.com/defunkt/coffee-mode.git
+;; It goes like this: when you press `TAB`, we indent the line unless
+;; doing so would make the current line more than two indentation levels
+;; deepers than the previous line. If that's the case, remove all
+;; indentation.
 
-;; In your emacs config:
+;; Consider this code, with point at the position indicated by the
+;; caret:
 
-;;     (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
-;;     (require 'coffee-mode)
+;;     line1()
+;;       line2()
+;;       line3()
+;;          ^
 
-;;; Thanks
+;; Pressing `TAB` will produce the following code:
 
-;; Major thanks to http://xahlee.org/emacs/elisp_syntax_coloring.html
-;; the instructions.
+;;     line1()
+;;       line2()
+;;         line3()
+;;            ^
 
-;; Also thanks to Jason Blevins's markdown-mode.el and Steve Yegge's
-;; js2-mode for guidance.
+;; Pressing `TAB` again will produce this code:
+
+;;     line1()
+;;       line2()
+;;     line3()
+;;        ^
+
+;; And so on. I think this is a pretty good way of getting decent
+;; indentation with a whitespace-sensitive language.
+
+;; ### Newline and Indent
+
+;; We all love hitting `RET` and having the next line indented
+;; properly. Given this code and cursor position:
+
+;;     line1()
+;;       line2()
+;;       line3()
+;;             ^
+
+;; Pressing `RET` would insert a newline and place our cursor at the
+;; following position:
+
+;;     line1()
+;;       line2()
+;;       line3()
+
+;;       ^
+
+;; In other words, the level of indentation is maintained. This
+;; applies to comments as well. Combined with the `TAB` you should be
+;; able to get things where you want them pretty easily.
+
+;; ### Indenters
+
+;; `class`, `for`, `if`, and possibly other keywords cause the next line
+;; to be indented a level deeper automatically.
+
+;; For example, given this code and cursor position::
+
+;;     class Animal
+;;                 ^
+
+;; Pressing enter would produce the following:
+
+;;     class Animal
+
+;;       ^
+
+;; That is, indented a column deeper.
+
+;; This also applies to lines ending in `->`, `=>`, `{`, `[`, and
+;; possibly more characters.
+
+;; So this code and cursor position:
+
+;;     $('#demo').click ->
+;;                        ^
+
+;; On enter would produce this:
+
+;;     $('#demo').click ->
+
+;;       ^
+
+;; Pretty slick.
+
+;; Thanks to Jeremy Ashkenas for CoffeeScript, and to
+;; http://xahlee.org/emacs/elisp_syntax_coloring.html, Jason
+;; Blevins's markdown-mode.el and Steve Yegge's js2-mode for guidance.
 
 ;; TODO:
-;; - Execute {buffer,region,line} and show output in new buffer
 ;; - Make prototype accessor assignments like `String::length: -> 10` pretty.
 ;; - mirror-mode - close brackets and parens automatically
 
@@ -105,9 +179,8 @@
 
 (defcustom coffee-compile-jump-to-error t
   "Whether to jump to the first error if compilation fails.
-Please note that the coffee compiler doesn't always give a line
-number for the issue and in that case it is not possible to jump
-to the error."
+Since the coffee compiler does not always include a line number in
+its error messages, this is not always possible."
   :type 'boolean
   :group 'coffee)
 
@@ -118,11 +191,40 @@ with CoffeeScript."
   :group 'coffee)
 
 (defcustom coffee-mode-hook nil
-  "Hook called by `coffee-mode'."
+  "Hook called by `coffee-mode'.  Examples:
+
+      ;; CoffeeScript uses two spaces.
+      (make-local-variable 'tab-width)
+      (set 'tab-width 2)
+
+      ;; If you don't want your compiled files to be wrapped
+      (setq coffee-args-compile '(\"-c\" \"--bare\"))
+
+      ;; Emacs key binding
+      (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
+
+      ;; Bleeding edge.
+      (setq coffee-command \"~/dev/coffee\")
+
+      ;; Compile '.coffee' files on every save
+      (and (file-exists-p (buffer-file-name))
+           (file-exists-p (coffee-compiled-file-name))
+           (coffee-cos-mode t)))"
   :type 'hook
   :group 'coffee)
 
-(defvar coffee-mode-map (make-keymap)
+(defvar coffee-mode-map
+  (let ((map (make-sparse-keymap)))
+    ;; key bindings
+    (define-key map (kbd "A-r") 'coffee-compile-buffer)
+    (define-key map (kbd "A-R") 'coffee-compile-region)
+    (define-key map (kbd "A-M-r") 'coffee-repl)
+    (define-key map [remap comment-dwim] 'coffee-comment-dwim)
+    (define-key map [remap newline-and-indent] 'coffee-newline-and-indent)
+    (define-key map "\C-m" 'coffee-newline-and-indent)
+    (define-key map "\C-c\C-o\C-s" 'coffee-cos-mode)
+    (define-key map "\177" 'coffee-dedent-line-backspace)
+    map)
   "Keymap for CoffeeScript major mode.")
 
 ;;
@@ -136,7 +238,8 @@ with CoffeeScript."
   (unless (comint-check-proc "*CoffeeREPL*")
     (set-buffer
      (apply 'make-comint "CoffeeREPL"
-            coffee-command nil coffee-args-repl)))
+            "env"
+            nil (append (list "NODE_NO_READLINE=1" coffee-command) coffee-args-repl))))
 
   (pop-to-buffer "*CoffeeREPL*"))
 
@@ -146,7 +249,12 @@ If FILENAME is omitted, the current buffer's file name is used."
   (concat (file-name-sans-extension (or filename (buffer-file-name))) ".js"))
 
 (defun coffee-compile-file ()
-  "Compiles and saves the current file to disk."
+  "Compiles and saves the current file to disk in a file of the same
+base name, with extension `.js'.  Subsequent runs will overwrite the
+file.
+
+If there are compilation errors, point is moved to the first
+(see `coffee-compile-jump-to-error')."
   (interactive)
   (let ((compiler-output (shell-command-to-string (coffee-command-compile (buffer-file-name)))))
     (if (string= compiler-output "")
@@ -239,6 +347,9 @@ called `coffee-compiled-buffer-name'."
 ;; Assignment
 (defvar coffee-assign-regexp "\\(\\(\\w\\|\\.\\|_\\|$\\)+?\s*\\):")
 
+;; Local Assignment
+(defvar coffee-local-assign-regexp "\\(\\(_\\|\\w\\|\\$\\)+\\)\s+=")
+
 ;; Lambda
 (defvar coffee-lambda-regexp "\\((.+)\\)?\\s *\\(->\\|=>\\)")
 
@@ -249,7 +360,8 @@ called `coffee-compiled-buffer-name'."
 (defvar coffee-boolean-regexp "\\b\\(true\\|false\\|yes\\|no\\|on\\|off\\|null\\|undefined\\)\\b")
 
 ;; Regular Expressions
-(defvar coffee-regexp-regexp "\\/\\(\\\\.\\|\\[\\(\\\\.\\|.\\)+?\\]\\|[^/]\\)+?\\/")
+(defvar coffee-regexp-regexp "\\/\\(\\\\.\\|\\[\\(\\\\.\\|.\\)+?\\]\\|[^/
+]\\)+?\\/")
 
 ;; JavaScript Keywords
 (defvar coffee-js-keywords
@@ -266,15 +378,21 @@ called `coffee-compiled-buffer-name'."
 
 ;; CoffeeScript keywords.
 (defvar coffee-cs-keywords
-      '("then" "unless" "and" "or" "is"
-        "isnt" "not" "of" "by" "where" "when"))
+      '("then" "unless" "and" "or" "is" "own"
+        "isnt" "not" "of" "by" "when"))
+
+;; Iced CoffeeScript keywords
+(defvar iced-coffee-cs-keywords
+  '("await" "defer"))
 
 ;; Regular expression combining the above three lists.
-(defvar coffee-keywords-regexp (regexp-opt
-                                (append
-                                 coffee-js-reserved
-                                 coffee-js-keywords
-                                 coffee-cs-keywords) 'words))
+(defvar coffee-keywords-regexp
+  ;; keywords can be member names.
+  (concat "[^.]"
+	  (regexp-opt (append coffee-js-reserved
+			      coffee-js-keywords
+			      coffee-cs-keywords
+			      iced-coffee-cs-keywords) 'words)))
 
 
 ;; Create the list for font-lock. Each class of keyword is given a
@@ -287,9 +405,11 @@ called `coffee-compiled-buffer-name'."
     (,coffee-this-regexp . font-lock-variable-name-face)
     (,coffee-prototype-regexp . font-lock-variable-name-face)
     (,coffee-assign-regexp . font-lock-type-face)
+    (,coffee-local-assign-regexp 1 font-lock-variable-name-face)
     (,coffee-regexp-regexp . font-lock-constant-face)
     (,coffee-boolean-regexp . font-lock-constant-face)
-    (,coffee-keywords-regexp . font-lock-keyword-face)))
+    (,coffee-lambda-regexp . (2 font-lock-function-name-face))
+    (,coffee-keywords-regexp 1 font-lock-keyword-face)))
 
 ;;
 ;; Helper Functions
@@ -477,12 +597,22 @@ output in a compilation buffer."
   (when (coffee-previous-line-is-comment)
     (insert "# ")))
 
+(defun coffee-dedent-line-backspace ()
+  "We want to be backspacing full tabs not just single characters."
+  (interactive)
+  (if (and (<= (point-marker) (save-excursion
+                                (back-to-indentation)
+                                (point-marker)))
+           (> (current-column) 0))
+      (backward-delete-char-untabify coffee-tab-width)
+    (backward-delete-char-untabify 1)))
+
 ;; Indenters help determine whether the current line should be
 ;; indented further based on the content of the previous line. If a
 ;; line starts with `class', for instance, you're probably going to
 ;; want to indent the next line.
 
-(defvar coffee-indenters-bol '("class" "for" "if" "try")
+(defvar coffee-indenters-bol '("class" "for" "if" "try" "while")
   "Keywords or syntax whose presence at the start of a line means the
 next line should probably be indented.")
 
@@ -519,7 +649,7 @@ previous line."
         ;; Optimized for speed - checks only the last character.
         (let ((indenters coffee-indenters-eol))
           (while indenters
-            (if (/= (char-before) (car indenters))
+            (if (and (char-before) (/= (char-before) (car indenters)))
                 (setq indenters (cdr indenters))
               (setq indenter-at-eol t)
               (setq indenters nil)))))
@@ -539,6 +669,50 @@ previous line."
     (backward-to-indentation 0)
     (= (char-after) (string-to-char "#"))))
 
+
+;; (defun coffee-quote-syntax (n)
+;;   "Put `syntax-table' property correctly on triple quote.
+;; Used for syntactic keywords.  N is the match number (1, 2 or 3)."
+;;   ;; From python-mode...
+;;   ;;
+;;   ;; Given a triple quote, we have to check the context to know
+;;   ;; whether this is an opening or closing triple or whether it's
+;;   ;; quoted anyhow, and should be ignored.  (For that we need to do
+;;   ;; the same job as `syntax-ppss' to be correct and it seems to be OK
+;;   ;; to use it here despite initial worries.)  We also have to sort
+;;   ;; out a possible prefix -- well, we don't _have_ to, but I think it
+;;   ;; should be treated as part of the string.
+
+;;   ;; Test cases:
+;;   ;;  ur"""ar""" x='"' # """
+;;   ;; x = ''' """ ' a
+;;   ;; '''
+;;   ;; x '"""' x """ \"""" x
+;;   (save-excursion
+;;     (goto-char (match-beginning 0))
+;;     (cond
+;;      ;; Consider property for the last char if in a fenced string.
+;;      ((= n 3)
+;;       (let* ((font-lock-syntactic-keywords nil)
+;; 	     (syntax (syntax-ppss)))
+;; 	(when (eq t (nth 3 syntax))	; after unclosed fence
+;; 	  (goto-char (nth 8 syntax))	; fence position
+;; 	  ;; (skip-chars-forward "uUrR")	; skip any prefix
+;; 	  ;; Is it a matching sequence?
+;; 	  (if (eq (char-after) (char-after (match-beginning 2)))
+;; 	      (eval-when-compile (string-to-syntax "|"))))))
+;;      ;; Consider property for initial char, accounting for prefixes.
+;;      ((or (and (= n 2)			; leading quote (not prefix)
+;; 	       (not (match-end 1)))     ; prefix is null
+;; 	  (and (= n 1)			; prefix
+;; 	       (match-end 1)))          ; non-empty
+;;       (let ((font-lock-syntactic-keywords nil))
+;; 	(unless (eq 'string (syntax-ppss-context (syntax-ppss)))
+;; 	  (eval-when-compile (string-to-syntax "|")))))
+;;      ;; Otherwise (we're in a non-matching string) the property is
+;;      ;; nil, which is OK.
+;;      )))
+
 ;;
 ;; Define Major Mode
 ;;
@@ -548,16 +722,11 @@ previous line."
   "Coffee"
   "Major mode for editing CoffeeScript."
 
-  ;; key bindings
-  (define-key coffee-mode-map (kbd "A-r") 'coffee-compile-buffer)
-  (define-key coffee-mode-map (kbd "A-R") 'coffee-compile-region)
-  (define-key coffee-mode-map (kbd "A-M-r") 'coffee-repl)
-  (define-key coffee-mode-map [remap comment-dwim] 'coffee-comment-dwim)
-  (define-key coffee-mode-map "\C-m" 'coffee-newline-and-indent)
-  (define-key coffee-mode-map "\C-c\C-o\C-s" 'coffee-cos-mode)
-
   ;; code for syntax highlighting
   (setq font-lock-defaults '((coffee-font-lock-keywords)))
+
+  ;; treat "_" as part of a word
+  (modify-syntax-entry ?_ "w" coffee-mode-syntax-table)
 
   ;; perl style comment: "# ..."
   (modify-syntax-entry ?# "< b" coffee-mode-syntax-table)
@@ -567,6 +736,16 @@ previous line."
 
   ;; single quote strings
   (modify-syntax-entry ?' "\"" coffee-mode-syntax-table)
+
+  ;; (setq font-lock-syntactic-keywords
+  ;;       ;; Make outer chars of matching triple-quote sequences into generic
+  ;;       ;; string delimiters.
+  ;;       ;; First avoid a sequence preceded by an odd number of backslashes.
+  ;;       `((,(concat "\\(?:^\\|[^\\]\\(?:\\\\.\\)*\\)" ;Prefix.
+  ;;                   "\\(?:\\('\\)\\('\\)\\('\\)\\|\\(?1:\"\\)\\(?2:\"\\)\\(?3:\"\\)\\)")
+  ;;          (1 (coffee-quote-syntax 1) nil lax)
+  ;;          (2 (coffee-quote-syntax 2))
+  ;;          (3 (coffee-quote-syntax 3)))))
 
   ;; indentation
   (make-local-variable 'indent-line-function)
@@ -588,7 +767,10 @@ previous line."
 (make-variable-buffer-local 'coffee-cos-mode-line)
 
 (define-minor-mode coffee-cos-mode
-  "Toggle compile-on-save for coffee-mode."
+  "Toggle compile-on-save for coffee-mode.
+
+Add `'(lambda () (coffee-cos-mode t))' to `coffee-mode-hook' to turn
+it on by default."
   :group 'coffee-cos :lighter coffee-cos-mode-line
   (cond
    (coffee-cos-mode
@@ -605,6 +787,8 @@ previous line."
 ;; Run coffee-mode for files ending in .coffee.
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.iced$" . coffee-mode))
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 ;;; coffee-mode.el ends here
