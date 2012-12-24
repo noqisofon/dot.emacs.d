@@ -41,7 +41,7 @@ Define a new CODING-SYSTEM by CCL programs DECODER and ENCODER.
 CODING-SYSTEM, DECODER and ENCODER must be symbol."
     (setq decoder (symbol-value decoder)
 	  encoder (symbol-value encoder))
-    (make-coding-system coding-system 4 mnemonic doc-string
+    (define-coding-system coding-system 4 mnemonic doc-string
 			nil		; Mule takes one more optional argument: EOL-TYPE.
 			(cons decoder encoder)))
   )

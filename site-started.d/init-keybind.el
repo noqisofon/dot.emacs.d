@@ -45,8 +45,5 @@
 
 (global-set-key (kbd "C-j") 'newline)
 
-;; 最近使ったファイルを別のバッファ領域に表示します。
-(define-key global-map (kbd "C-c r") 'recentf-open-files)
-
 (provide 'init-keybind)
 ;; init-keybind.el ends here

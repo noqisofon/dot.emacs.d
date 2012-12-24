@@ -27,5 +27,8 @@
 ;; 最大 15 ファイルまで記録します。
 (setq recentf-max-saved-items 15)
 
+;; 最近使ったファイルを別のバッファ領域に表示します。
+(define-key global-map (kbd "C-c r") 'recentf-open-files)
+
 (provide 'init-recentf)
 ;; init-recentf.el ends here

@@ -20,7 +20,7 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(lazyload (espresso-mode) "espresso")
+(require-if-exists js2-mode)
 
 (push '("\\.js$" . js2-mode) auto-mode-alist)
 
@@ -34,7 +34,6 @@
                        js2-bounce-indent-flag nil
                        indent-tabs-mode nil
                        c-basic-offset 4))
-(require-if-exists js2-mode)
 
 (provide 'init-javascript)
 ;; init-javascript.el ends here

@@ -26,6 +26,12 @@
 ;; ディスプレイ。
 (require 'init-display)
 
+;; ibus 用。
+;(require 'init-ibus)
+
+;; mozc 用。
+(require 'init-mozc)
+
 ;; emacsclient 用。
 (require 'init-emacsclient)
 
@@ -55,12 +61,6 @@
 
 ;; タイムスタンプ。
 (require 'init-time-stamp)
-
-;; eldoc。
-(require 'init-eldoc)
-
-;; C 用の eldoc。
-(require 'init-c-eldoc)
 
 ;; タイムスタンプ。
 (require 'time-stamp)
@@ -139,6 +139,12 @@
 
 ;; zencoding 用。
 (require 'init-zencoding)
+
+;; eldoc。
+(require 'init-eldoc)
+
+;; C 用の eldoc。
+(require 'init-c-eldoc)
 
 ;; Git 用。
 (require 'init-magit)
