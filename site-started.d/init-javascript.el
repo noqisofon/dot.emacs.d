@@ -20,12 +20,13 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(require-if-exists js2-mode)
+(require-if-exists espresso)
+(autoload 'js2-mode "js2-mode" nil t)
 
+;;(delete (cons "\\.js$" 'js-mode) auto-mode-alist)
 (push '("\\.js$" . js2-mode) auto-mode-alist)
 
-(add-hook-lambda js2-mode-hook 
-                 (require-if-exists espresso)
+(add-hook-lambda 'js2-mode-hook
                  (setq espresso-indent-level 4
                        ;; 保存時に行末の空白を削除しません。
                        js2-cleanup-white-space nil

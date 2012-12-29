@@ -95,6 +95,9 @@
 ;; ecmascript 用。
 (require 'init-ecmascript)
 
+;; javacript 用。
+(require 'init-javascript)
+
 ;; vala 用。
 (require 'init-vala)
 
@@ -133,6 +136,9 @@
 
 ;; sass 用。
 (require 'init-sass)
+
+;; less 用。
+(require 'init-less)
 
 ;; coffeescript 用。
 (require 'init-coffee)
