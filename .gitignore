@@ -3,9 +3,12 @@
 \#*#
 
 *.elc
+*.swp
 
 tramp
 
 auto-save-list/
 elpa/
 private/
+eshell/
+server/

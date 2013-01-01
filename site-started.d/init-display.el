@@ -22,7 +22,7 @@
 
 (setq default-frame-alist
       (append (list
-               '(width . 170)
+               '(width . 160)
                '(height . 20)
                '(top . 5)
                '(left . 5))
@@ -65,6 +65,9 @@
 (cond
  ((find-font (font-spec :family "Ricty"))
   (setting-font "Ricty"))
+
+ ((find-font (font-spec :family "MigMix 1M"))
+  (setting-font "MigMix 1M"))
 
  ((find-font (font-spec :family "TakaoGothic"))
   (setting-font "TakaoGothic"))

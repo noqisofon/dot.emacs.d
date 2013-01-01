@@ -47,8 +47,9 @@
 ;; 行数。
 (require 'init-line-number)
 
-;; Elscreen。
-(require 'init-elscreen)
+(if (featurep 'alist)
+    ;; Elscreen。
+    (require 'init-elscreen))
 
 ;; キーバインド。
 (require 'init-keybind)
