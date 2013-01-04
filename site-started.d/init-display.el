@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-display.el -- Emacs init setting elisp file
 
@@ -23,11 +23,11 @@
 (setq default-frame-alist
       (append (list
                '(width . 160)
-               '(height . 20)
+               '(height . 15)
                '(top . 5)
                '(left . 5))
               default-frame-alist))
-
+;; ウィンドウの透明度を表します。
 (setq *frame-alpha* 95)
 
 (if *meadow3-p*
@@ -37,6 +37,7 @@
 
 ;; カーソルを縦棒にします。
 (if (fboundp 'set-cursor-type)
+    ;; Meadow2 では、set-cursor-type 関数が定義されています。
     (set-cursor-type 'hairline-caret)
   ;; else
   (if *meadow3-p*

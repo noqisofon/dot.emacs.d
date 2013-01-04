@@ -109,9 +109,10 @@
 (defvar *xemacs-no-mule-p*
   (and *xemacs-p* (not (featurep 'mule))))
 
-;; 日本語環境を指定します。
-;;(set-language-environment "Japanese")
-(set-language-environment "utf-8")
+(if t
+    ;; 日本語環境を指定します。
+    (set-language-environment "Japanese")
+  (set-language-environment "utf-8"))
 
 ;;; Char code:
 (if *windows-p*
@@ -131,7 +132,7 @@
       (set-keyboard-coding-system default-coding)
       ;; 新規作成するバッファのエンコードです。
       (prefer-coding-system default-coding))
-  ;; else
+  ;; else:
   (let ((default-coding 'utf-8-unix))
     (if (fboundp 'set-default-coding-system)
         (set-default-coding-system default-coding))
