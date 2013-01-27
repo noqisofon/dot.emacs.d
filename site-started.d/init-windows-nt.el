@@ -114,6 +114,9 @@
 ;; clojure 用。
 (require 'init-clojure)
 
+;; Go 用。
+(require 'init-go)
+
 ;; org-mode 用。
 (require 'init-org-mode)
 

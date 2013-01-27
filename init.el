@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init.el -- Emacs init setting elisp file
 
@@ -185,4 +185,3 @@
                    (+ (third before-init-time) (* 1000000 (second before-init-time))))
                 1000)))
   (add-hook 'after-init-hook 'present-startup-time))
-

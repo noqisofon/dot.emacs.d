@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-unix-like.el -- Emacs init setting elisp file
 
@@ -112,6 +112,9 @@
 
 ;; clojure 用。
 (require 'init-clojure)
+
+;; Go 用。
+(require 'init-go)
 
 ;; org-mode 用。
 (require 'init-org-mode)
