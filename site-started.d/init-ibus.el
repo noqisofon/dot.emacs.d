@@ -24,14 +24,19 @@
 
 ;;; Code:
 (require-if-exists ibus)
+
+;; 初期化した後のフックに ibus-mode-on を追加しておきます。
 (add-hook 'after-init-hook 'ibus-mode-on)
 
 ;; 総てのバッファで入力状態を共有します。
 (setq ibus-mode-local nil)
-;;; カーソル位置で予測桜甫ウィンドウを表示します。
-;(setq ibus-prediction-window-position t)
+
+;; カーソル位置で予測候補ウィンドウを表示します。
+(setq ibus-prediction-window-position t)
+
 ;; iserarch 時はオフにしておきます。
 (ibus-disable-isearch)
+
 ;; mini buffer でもオフにしておきます。
 (add-hook 'minibuffer-setup-hook 'ibus-disable)
 

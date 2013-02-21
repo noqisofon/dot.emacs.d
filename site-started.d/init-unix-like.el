@@ -23,137 +23,17 @@
 
 (setq x-select-enable-clipboard t)
 
-;; ディスプレイ。
-(require 'init-display)
+;; どんな OS でも共通の設定。
+(require 'init-default)
+
+;; プログラム言語や、マークアップ言語用の設定。
+(require 'init-languages)
 
 ;; ibus 用。
-;(require 'init-ibus)
+(require 'init-ibus)
 
-;; mozc 用。
-(require 'init-mozc)
-
-;; emacsclient 用。
-(require 'init-emacsclient)
-
-;; auto-insert 用。
-(require 'init-auto-insert)
-
-;; モードライン。
-(require 'init-modeline)
-
-;; recentf。
-(require 'init-recentf)
-
-;; menu-tree。
-(require 'init-menu-tree)
-
-;; カラーテーマ。
-(require 'init-color-theme)
-
-;; 行数。
-(require 'init-line-number)
-
-;; Elscreen。
-(require 'init-elscreen)
-
-;; キーバインド。
-(require 'init-keybind)
-
-;; タイムスタンプ。
-(require 'init-time-stamp)
-
-;; タイムスタンプ。
-(require 'time-stamp)
-
-;; スクロール。
-(require 'init-scrolling)
-
-;; セッション。
-(require 'init-session)
-
-;; highlight line。
-(require 'init-hl-line)
-
-;; Yasnippet。
-(require 'init-yasnippet)
-
-;; anything 用。
-(require 'init-anything)
-
-;; htmlize 用。
-(require 'init-htmlize)
-
-;; C 言語ファミリー用。
-(require 'init-c-common)
-
-;; Objective-C 用。
-(require 'init-objc)
-
-;; Smalltalk 用。
-(require 'init-smalltalk)
-
-;; ecmascript 用。
-(require 'init-ecmascript)
-
-;; javacript 用。
-(require 'init-javascript)
-
-;; vala 用。
-(require 'init-vala)
-
-;; C# 用。
-(require 'init-csharp)
-
-;; D 用。
-(require 'init-d)
-
-;; Ruby 用。
-(require 'init-ruby)
-
-;; Scala 用。
-(require 'init-scala)
-
-;; clojure 用。
-(require 'init-clojure)
-
-;; org-mode 用。
-(require 'init-org-mode)
-
-;; SGML 用。
-(require 'init-sgml)
-
-;; CMake 用。
-(require 'init-cmake)
-
-;; markdown 用。
-(require 'init-markdown)
-
-;; yaml 用。
-(require 'init-yaml)
-
-;; haml 用。
-(require 'init-haml)
-
-;; sass 用。
-(require 'init-sass)
-
-;; less 用。
-(require 'init-less)
-
-;; coffeescript 用。
-(require 'init-coffee)
-
-;; zencoding 用。
-(require 'init-zencoding)
-
-;; eldoc。
-(require 'init-eldoc)
-
-;; C 用の eldoc。
-(require 'init-c-eldoc)
-
-;; Git 用。
-(require 'init-magit)
+;;; mozc 用。
+;;(require 'init-mozc)
 
 (provide 'init-unix-like)
 ;; init-unix-like.el ends here

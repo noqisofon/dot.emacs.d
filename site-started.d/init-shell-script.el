@@ -1,6 +1,6 @@
-;;; init-less.el --- 
+;;; init-shell-script.el --- 
 
-;; Copyright (C) 2012  ned rihine
+;; Copyright (C) 2013  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keywords: tools
@@ -24,10 +24,11 @@
 
 ;;; Code:
 
-(push '("\\.less$" . less-mode) auto-mode-alist)
+(add-hook-lambda sh-mode-hook
+                 (setq sh-basic-offset 2
+                       sh-indentation 2))
 
-(require-if-exists less-mode)
 
 
-(provide 'init-less)
-;;; init-less.el ends here
+(provide 'init-shell-script)
+;;; init-shell-script.el ends here

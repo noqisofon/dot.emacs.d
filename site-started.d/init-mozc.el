@@ -26,8 +26,14 @@
 (require-if-exists mozc
                    (setq default-input-method "japanese-mozc"))
 
-
-(setq mozc-candidate-style 'echo-area)
+;;
+;; 変換候補の表示スタイルに候補のリストを入力中文字列の側に表示する 'overlay モードを選択します。
+;; 設定できるシンボルには以下の 2 つがあります：
+;; 
+;;     - 'overlay
+;;     - 'echoarea
+;; 
+(setq mozc-candidate-style 'overlay)
 
 
 (global-set-key (kbd "<f7>")
