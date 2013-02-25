@@ -20,7 +20,7 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(if (boundp 'yas-snippet-dirs)
+(if (not (boundp 'yas-snippet-dirs))
     (setq yas-snippet-dirs nil))
 
 ;; スニペットの位置を設定します。
@@ -31,8 +31,7 @@
       (push snippet-path yas-snippet-dirs)))
 
 (let ((snippet-path (concat user-emacs-directory "site-lisp/yasnippet/snippets")))
-  (if (file-exists-p snippet-path)
-      (push snippet-path yas-snippet-dirs)))
+  (push snippet-path yas-snippet-dirs))
 
 (require-if-exists yasnippet)
 

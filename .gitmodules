@@ -19,3 +19,6 @@
 [submodule "site-lisp/menu-tree"]
 	path = site-lisp/menu-tree
 	url = git://github.com/emacsmirror/menu-tree.git
+[submodule "site-lisp/deferred"]
+	path = site-lisp/deferred
+	url = git://github.com/kiwanami/emacs-deferred.git
