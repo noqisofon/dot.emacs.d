@@ -1,0 +1,21 @@
+[submodule "site-lisp/csharp-mode"]
+	path = site-lisp/csharp-mode
+	url = https://github.com/Sectoid/csharp-mode.git
+[submodule "site-lisp/c-eldoc"]
+	path = site-lisp/c-eldoc
+	url = git://github.com/mooz/c-eldoc.git
+[submodule "site-lisp/yasnippet"]
+	path = site-lisp/yasnippet
+	url = git://github.com/capitaomorte/yasnippet.git
+[submodule "site-lisp/zencoding"]
+	path = site-lisp/zencoding
+	url = git://github.com/rooney/zencoding.git
+[submodule "site-lisp/js2-mode"]
+	path = site-lisp/js2-mode
+	url = git://github.com/mooz/js2-mode.git
+[submodule "site-lisp/markdown-mode"]
+	path = site-lisp/markdown-mode
+	url = git://github.com/defunkt/markdown-mode.git
+[submodule "site-lisp/menu-tree"]
+	path = site-lisp/menu-tree
+	url = git://github.com/emacsmirror/menu-tree.git

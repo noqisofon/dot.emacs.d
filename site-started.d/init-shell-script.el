@@ -1,3 +1,5 @@
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
+
 ;;; init-shell-script.el --- 
 
 ;; Copyright (C) 2013  ned rihine
@@ -24,11 +26,14 @@
 
 ;;; Code:
 
-(add-hook-lambda sh-mode-hook
-                 (setq sh-basic-offset 2
-                       sh-indentation 2))
+;; (add-hook-lambda sh-mode-hook
+;;                  )
 
+(setq-default sh-basic-offset 2
+              sh-indentation 2)
 
+(setq-default sh-indent-for-case-label 0
+              sh-indent-for-case-alt '+)
 
 (provide 'init-shell-script)
 ;;; init-shell-script.el ends here
