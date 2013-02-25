@@ -22,3 +22,6 @@
 [submodule "site-lisp/deferred"]
 	path = site-lisp/deferred
 	url = git://github.com/kiwanami/emacs-deferred.git
+[submodule "site-lisp/yaml-mode"]
+	path = site-lisp/yaml-mode
+	url = git://github.com/yoshiki/yaml-mode.git
