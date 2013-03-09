@@ -20,10 +20,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Profiles:
-
-(setq user-full-name "ned rihine")
-(setq user-mail-address "ned.rihine@gmail.com")
+;;; Code:
+(load "~/.emacs.d/private/my-profile.el")
 
 ;;; Debug modes:
 ;; TODO: デバッグモード時のみ t にする。
@@ -46,7 +44,6 @@
             (normal-top-level-add-subdirs-to-load-path))))))
 
 (add-to-load-path "site-lisp" "site-started.d")
-
 
 ;;;
 ;; 
