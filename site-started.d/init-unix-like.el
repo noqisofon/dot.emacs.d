@@ -30,10 +30,10 @@
 (require 'init-languages)
 
 ;; ibus 用。
-(require 'init-ibus)
+;;(require 'init-ibus)
 
-;;; mozc 用。
-;;(require 'init-mozc)
+;; mozc 用。
+(require 'init-mozc)
 
 (provide 'init-unix-like)
 ;; init-unix-like.el ends here

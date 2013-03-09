@@ -28,6 +28,12 @@
 ;; 初期化した後のフックに ibus-mode-on を追加しておきます。
 (add-hook 'after-init-hook 'ibus-mode-on)
 
+;; ibus-el-agent を実行する python のコマンドを設定します。
+(setq ibus-python-shell-command-name "python2")
+
+;; ibus の Emacs 用のエージェントプログラムのパスを設定します。
+(setq ibus-agent-file-name "/usr/share/emacs/site-lisp/ibus/ibus-el-agent")
+
 ;; 総てのバッファで入力状態を共有します。
 (setq ibus-mode-local nil)
 
@@ -40,7 +46,11 @@
 ;; mini buffer でもオフにしておきます。
 (add-hook 'minibuffer-setup-hook 'ibus-disable)
 
-;(global-set-key (kbd "<zenkaku-hankaku>") 'toggle-input-method)
+;; カーソル位置で予測候補窓を表示するようにします。
+(setq ibus-prediction-window-position t)
+
+;; 半角／全角キーでインプットメソッドを切り替えるようにします。
+(global-set-key (kbd "<zenkaku-hankaku>") 'toggle-input-method)
 
 (provide 'init-ibus)
 ;;; init-ibus.el ends here
