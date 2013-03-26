@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-menu-tree.el -- Emacs init setting elisp file
 
@@ -20,8 +20,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(cond (t
-       (setq menu-tree-coding-system 'utf-8)))
+;; (cond (t
+;;        (setq menu-tree-coding-system 'utf-8)))
 
 (require 'menu-tree)
 

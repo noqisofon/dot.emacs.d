@@ -39,8 +39,8 @@
 ;; recentf。
 (require 'init-recentf)
 
-;; menu-tree。
-(require 'init-menu-tree)
+;; ;; menu-tree。
+;; (require 'init-menu-tree)
 
 ;; カラーテーマ。
 (require 'init-color-theme)
