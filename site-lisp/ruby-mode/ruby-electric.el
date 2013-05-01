@@ -140,7 +140,7 @@ strings. Note that you must have Font Lock enabled."
   (and ruby-electric-mode
        (consp (memq 'font-lock-string-face (text-properties-at (point))))))
 
-(defun ruby-electric-is-last-command-event-expandable-punct-p()
+(defun ruby-electric-is-last-command-char-expandable-punct-p()
   (or (memq 'all ruby-electric-expand-delimiters-list)
       (memq last-command-event ruby-electric-expand-delimiters-list)))
 
@@ -179,7 +179,7 @@ strings. Note that you must have Font Lock enabled."
 (defun ruby-electric-curlies(arg)
   (interactive "P")
   (ruby-electric-insert arg
-    (if (ruby-electric-is-last-command-event-expandable-punct-p)
+    (if (ruby-electric-is-last-command-char-expandable-punct-p)
         (cond ((ruby-electric-code-at-point-p)
                (insert " ")
                (save-excursion
@@ -201,7 +201,7 @@ strings. Note that you must have Font Lock enabled."
 (defun ruby-electric-matching-char(arg)
   (interactive "P")
   (ruby-electric-insert arg
-    (and (ruby-electric-is-last-command-event-expandable-punct-p)
+    (and (ruby-electric-is-last-command-char-expandable-punct-p)
          (ruby-electric-code-at-point-p)
          (save-excursion
            (insert (cdr (assoc last-command-event
@@ -210,7 +210,7 @@ strings. Note that you must have Font Lock enabled."
 (defun ruby-electric-bar(arg)
   (interactive "P")
   (ruby-electric-insert arg
-    (and (ruby-electric-is-last-command-event-expandable-punct-p)
+    (and (ruby-electric-is-last-command-char-expandable-punct-p)
          (ruby-electric-code-at-point-p)
          (and (save-excursion (re-search-backward ruby-electric-expandable-bar nil t))
               (= (point) (match-end 0))) ;looking-back is missing on XEmacs

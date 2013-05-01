@@ -1221,7 +1221,7 @@ balanced expression is found."
   (or (boundp 'font-lock-variable-name-face)
       (setq font-lock-variable-name-face font-lock-type-face))
 
-  (defconst ruby-syntax-propertize-function
+  (defconst ruby-font-lock-syntactic-keywords
         `(
           ;; #{ }, #$hoge, #@foo are not comments
           ("\\(#\\)[{$@]" 1 (1 . nil))
@@ -1336,8 +1336,8 @@ buffer position `limit' or the end of the buffer."
            '((ruby-font-lock-keywords)
              nil nil nil
              beginning-of-line
-             (syntax-propertize-function
-              . ruby-syntax-propertize-function))))
+             (font-lock-syntactic-keywords
+              . ruby-font-lock-syntactic-keywords))))
 
   (defun ruby-font-lock-docs (limit)
     (if (re-search-forward "^=begin\\(\\s \\|$\\)" limit t)
@@ -1505,7 +1505,7 @@ The variable ruby-indent-level controls the amount of indentation.
   (set (make-local-variable 'font-lock-defaults) '((ruby-font-lock-keywords) nil nil))
   (set (make-local-variable 'font-lock-keywords) ruby-font-lock-keywords)
   (set (make-local-variable 'font-lock-syntax-table) ruby-font-lock-syntax-table)
-  (set (make-local-variable 'syntax-propertize-function) ruby-syntax-propertize-function)
+  (set (make-local-variable 'font-lock-syntactic-keywords) ruby-font-lock-syntactic-keywords)
 
   (if (fboundp 'run-mode-hooks)
       (run-mode-hooks 'ruby-mode-hook)

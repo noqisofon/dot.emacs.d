@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-macosx_x.el -- Emacs init setting elisp file
 
@@ -28,7 +28,7 @@
 (require 'init-recentf)
 
 ;; menu-tree。
-(require 'init-menu-tree)
+;;(require 'init-menu-tree)
 
 ;; カラーテーマ。
 (require 'init-color-theme)

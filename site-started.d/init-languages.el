@@ -98,6 +98,9 @@
 ;; Git 用。
 (require 'init-magit)
 
+;; Haskell 用。
+(require 'init-haskell)
+
 
 (provide 'init-languages)
 ;;; init-languages.el ends here

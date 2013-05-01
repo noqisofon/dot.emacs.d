@@ -29,11 +29,19 @@
 ;; プログラム言語や、マークアップ言語用の設定。
 (require 'init-languages)
 
-;; ibus 用。
-;;(require 'init-ibus)
 
-;; mozc 用。
-(require 'init-mozc)
+(if (equal (getenv "XIM") "ibus")
+    (progn
+      ;; ;; ibus 用。
+      ;;(require 'init-ibus)
+      ;; mozc 用。
+      (require 'init-mozc))
+  ;; else
+  (if (equal (getenv "XIM") "uim")
+      (progn
+        ;; uim 用。
+        (require 'init-uim))))
+
 
 (provide 'init-unix-like)
 ;; init-unix-like.el ends here
