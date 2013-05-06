@@ -2,7 +2,7 @@
 
 ;; init-macosx_x.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2013 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools
@@ -21,65 +21,11 @@
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
 
-;; ディスプレイ。
-(require 'init-display)
+;; どんな OS でも共通の設定。
+(require 'init-default)
 
-;; recentf。
-(require 'init-recentf)
-
-;; menu-tree。
-;;(require 'init-menu-tree)
-
-;; カラーテーマ。
-(require 'init-color-theme)
-
-;; 行数。
-(require 'init-line-number)
-
-;; Elscreen。
-(require 'init-elscreen)
-
-;; キーバインド。
-(require 'init-keybind)
-
-;; タイムスタンプ。
-(require 'time-stamp)
-
-;; スクロール。
-(require 'init-scrolling)
-
-;; セッション。
-(require 'init-session)
-
-;; highlight line。
-(require 'init-hl-line)
-
-;; Yasnippet。
-(require 'init-yasnippet)
-
-;; markdown 用。
-(require 'init-markdown)
-
-;; Ruby 用。
-(require 'init-ruby)
-
-;; htmlize 用。
-(require 'init-htmlize)
-
-;; C 言語ファミリー用。
-(require 'init-c-common)
-
-;; anything 用。
-(require 'init-anything)
-
-;; org-mode 用。
-(require 'init-org-mode)
-
-;; SGML 用。
-(require 'init-sgml)
-
-;; zencoding 用。
-(require 'init-zencoding)
+;; プログラム言語や、マークアップ言語用の設定。
+(require 'init-languages)
 
 (provide 'init-macos_x)
 ;; init-macosx_x.el ends here

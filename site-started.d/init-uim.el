@@ -26,6 +26,17 @@
 ;;; Code:
 (require-if-exists uim)
 
+;; Emacs 上で C-SPC が IM の入力モードの切り替えに使われてしまうのを抑止する
+;; =============================================================================
+
+;; デスクトップ環境上で IM のオン・オフのキー割り当てに C-SPC を設定していると、uim.el がアクティブになっている時 C-SPC は入力モードの切り替えに使用されます。
+;; これを抑止し、set-mark-command として使用するには、以下の設定を .emacs.d/init.el あるいはその他の Emacs カスタム設定用ファイルに追加します。
+(add-hook 'uim-load-hook
+          '(lambda ()
+             (define-key uim-mode-map [67108896] nil)
+             (define-key uim-mode-map [0] nil)))
+
+
 ;; ;; デフォルトの IM を uim 提供のものに設定 (以下は Anthy の例)
 ;; (setq default-input-method "japanese-anthy-uim")
 (setq default-input-method "japanese-mozc-uim")
@@ -44,7 +55,8 @@
 ;;   もし、uim 全体の設定とは異なるIMをデフォルトで利用したければ、
 ;;   uim-default-im-engine 変数にそのIM名を設定して下さい。例えば
 ;;   uim-anthy をデフォルトで利用したければ、以下を記述します。
-(setq uim-default-im-engine "anthy")
+;;(setq uim-default-im-engine "anthy")
+(setq uim-default-im-engine "mozc")
 
 
 ;; * インライン変換候補表示機能をデフォルトで有効にする
@@ -65,8 +77,25 @@
 (setq uim-candidate-display-inline t)
 
 
-(set-face-foreground 'uim-preedit-highlight-face "white")
+(set-face-foreground 'uim-preedit-highlight-face "black")
 (set-face-background 'uim-preedit-highlight-face "blue")
+
+(set-face-foreground 'uim-separator-face "blue")
+
+(set-face-foreground 'uim-candidate-odd-face "blue")
+(set-face-background 'uim-candidate-odd-face "white")
+
+(set-face-foreground 'uim-candidate-even-face "blue")
+(set-face-background 'uim-candidate-even-face "yellow")
+
+(set-face-foreground 'uim-candidate-selected-face "blue")
+(set-face-background 'uim-candidate-selected-face "white")
+
+(set-face-foreground 'uim-candidate-nth-face "red")
+(set-face-background 'uim-candidate-nth-face "white")
+
+
+(uim-mode)
 
 (provide 'init-uim)
 ;;; init-uim.el ends here

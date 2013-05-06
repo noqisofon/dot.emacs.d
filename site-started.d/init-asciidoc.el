@@ -1,9 +1,9 @@
-;;; init-windows-nt.el --- 
+;;; init-asciidoc.el --- 
 
-;; Copyright (C) 2012-2013  ned rihine
+;; Copyright (C) 2013  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
-;; Keywords: 
+;; Keywords: tools
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,12 +23,10 @@
 ;; 
 
 ;;; Code:
-;; どんな OS でも共通の設定。
-(require 'init-default)
+(require-if-exists asciidoc-mode)
 
-;; プログラム言語や、マークアップ言語用の設定。
-(require 'init-languages)
+(push '("\\.\\(ascii\\|asciidoc\\)$" . asciidoc-mode) auto-mode-alist)
 
 
-(provide 'init-windows-nt)
-;;; init-windows-nt.el ends here
+(provide 'init-asciidoc)
+;;; init-asciidoc.el ends here

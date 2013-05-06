@@ -101,6 +101,9 @@
 ;; Haskell 用。
 (require 'init-haskell)
 
+;; AsciiDoc 用。
+(require 'init-asciidoc)
+
 
 (provide 'init-languages)
 ;;; init-languages.el ends here
