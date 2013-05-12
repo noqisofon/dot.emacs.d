@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-emacsclient.el -- Emacs init setting elisp file
 
@@ -19,10 +19,12 @@
 
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
+;;
+(require-if-exists server)
 
-
-(unless (server-running-p)
-  (server-start))
+(if (fboundp 'server-running-p)
+    (unless (server-running-p)
+      (server-start)))
 
 
 (provide 'init-emacsclient)

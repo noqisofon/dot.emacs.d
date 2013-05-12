@@ -110,13 +110,6 @@
                       '(progn
                         ,@body))))
 
-;;; emacsclient:
-;; emacsclient を起動するためにサーバを起動します。
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
-
 ;; 現在選択中のバッファがファイルからできているかどうか判別します。
 (defun selected-buffer-from-file-p ()
   "現在選択中のバッファがファイルからできているかどうか判別します。"
@@ -234,7 +227,6 @@
             (if (equal time-zone "")
                 (concat iso8601-text (car (cdr (current-time-zone))))
               iso8601-text))))
-(global-set-key (kbd "C-x t d") 'insert-iso8601format-datetime)
 
 
 ;; 現在選択中のバッファのファイル名、あるいはバッファ名を返します。
@@ -247,7 +239,7 @@
         selected-buffer-name
       ;; else
       selected-buffer-filename)))
-(global-set-key (kbd "C-x v f") 'get-selected-buffer-name)
+
 
 
 ;; テンポラリバッファを作成し、それをウィンドウに表示します。
@@ -258,8 +250,6 @@
   (switch-to-buffer (generate-new-buffer "*temp*"))
   ;; セーブが必要ないことを指定します？
   (setq buffer-offer-save nil))
-;; C-c t でテンポラリバッファを作成します。
-(global-set-key (kbd "C-c t") 'create-temporary-buffer)
 
 ;; *scratch* バッファは簡単な処理に便利なバッファです。
 ;; しかし，そのバッファの内容を 別名で保存したり、kill したりすると，*scratch* バッファが消えてしまい，また作らないといけません。

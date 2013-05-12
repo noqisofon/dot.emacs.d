@@ -21,7 +21,7 @@
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Code:
-(load "~/.emacs.d/private/my-profile.el")
+(load "~/.emacs.d/private/profile.el")
 
 ;;; Debug modes:
 ;; TODO: デバッグモード時のみ t にする。
