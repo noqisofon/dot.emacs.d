@@ -20,30 +20,42 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(setq default-frame-alist
-      (append (list
-               '(width . 170)
-               '(height . 20)
-               '(top . 5)
-               '(left . 5))
-              default-frame-alist))
-
-(setq *frame-alpha* 95)
-
-(if *meadow3-p*
-    (set-frame-parameter nil 'alpha *frame-alpha*)
-  ;; else
-  (add-to-list 'default-frame-alist (cons 'alpha *frame-alpha*)))
-
-;; カーソルを縦棒にします。
-(if (fboundp 'set-cursor-type)
-    (set-cursor-type 'hairline-caret)
-  ;; else
-  (if *meadow3-p*
-      (add-to-list 'default-frame-alist '(cursor-type . hairline-caret))
+(let (
+      ;; フレーム(窓)の幅です。
+      (frame-width 170)
+      ;; フレーム(窓)の高さです。
+      (frame-height 20)
+      ;; フレーム(窓)の左上の位置(X 軸的な意味で)です。
+      (frame-top 5)
+      ;; フレーム(窓)の左上の位置(Y 軸的な意味で)です。
+      (frame-left 5)
+      ;; フレーム(窓)の透明度をです。
+      (frame-alpha 95)
+      ;; フレーム(窓)のカーソルです。
+      ;; 基本的に縦棒(bar)を設定します。
+      ;; Meadow3 では hairline-caret という Windows のメモ帳とかでの縦棒？に似たシンボルがあるので、それを設定します。
+      ;; それ以外では普通に bar を設定します。
+      (frame-cursor-type (if *meadow3-p*
+                             'hairline-caret
+                           ;; else
+                           'bar)))
+  ;; フレームのパラメータを設定します。
+  (setq default-frame-alist
+        (append (list (cons 'width frame-width)
+                      (cons 'height frame-height)
+                      (cons 'top frame-top)
+                      (cons 'left frame-left)
+                      (cons 'alpha frame-alpha))
+                default-frame-alist))
+  ;; カーソルを設定します。
+  (if (fboundp 'set-cursor-type)
+      ;; Meadow では、set-cursor-type っていう関数があって、それを使ってもよいのですが、
+      ;; 他の Emacsen では無いので、default-frame-alist に設定します。
+      (set-cursor-type frame-cursor-type)
     ;; else
-    (add-to-list 'default-frame-alist '(cursor-type . bar))))
+    (add-to-list 'default-frame-alist (cons 'cursor-type frame-cursor-type))))
 
+;; フォント名を指定して使用するフォントを設定します。
 (defun setting-font (font-name)
   (let* ((fontset-name font-name)
          (size 13)
@@ -99,6 +111,18 @@
 ;; 変更点に色付けしません(ウザいので)。
 ;(global-highlight-changes-mode nil)
 ;(setq highlight-changes-visibility-initial-state nil)
+
+;;; Fringe
+(setq-default indicate-buffer-boundaries 'left)
+;; 右フリンジの上下にマークをつける
+(setq-default indicate-buffer-boundaries 'right)
+
+;; 左フリンジの上と右フリンジの下にマークをつける
+(setq-default indicate-buffer-boundaries '((top . left) (t . right)))
+;; 右フリンジの上と左フリンジの下にマークをつける
+(setq-default indicate-buffer-boundaries '((top . right) (t . left)))
+;; 右フリンジの上にのみマークをつける
+(setq-default indicate-buffer-boundaries '((top . right) (t . nil)))
 
 (provide 'init-display)
 ;; init-display.el ends here

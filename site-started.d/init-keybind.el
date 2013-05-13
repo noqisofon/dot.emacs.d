@@ -55,5 +55,8 @@
 ;; C-x t d でカーソルの後に現在の時刻を ISO 8601 形式で挿入します。
 (global-set-key (kbd "C-x t d") 'insert-iso8601format-datetime)
 
+;; 最近使ったファイルを別のバッファ領域に表示します。
+(define-key global-map (kbd "C-c r") 'recentf-open-files)
+
 (provide 'init-keybind)
 ;; init-keybind.el ends here

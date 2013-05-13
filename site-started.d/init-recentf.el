@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-recentf.el -- Emacs init setting elisp file
 
@@ -22,13 +22,11 @@
 
 ;; 最近使ったファイルの一覧を表示します。
 (recentf-mode t)
+
 ;; メニューに表示するファイル名を 10 までにします。
 (setq recentf-max-menu-items 10)
 ;; 最大 15 ファイルまで記録します。
 (setq recentf-max-saved-items 15)
-
-;; 最近使ったファイルを別のバッファ領域に表示します。
-(define-key global-map (kbd "C-c r") 'recentf-open-files)
 
 (provide 'init-recentf)
 ;; init-recentf.el ends here

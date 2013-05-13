@@ -110,6 +110,14 @@
                       '(progn
                         ,@body))))
 
+
+(defun load-safe (load-lib)
+  "安全な load です。読み込みに失敗してもそこで止まったりしません。"
+  (let ((load-status (load load-lib t)))
+    (or load-status
+        (message (format "[load-safe] failed %s" load-lib)))
+    load-status))
+
 ;; 現在選択中のバッファがファイルからできているかどうか判別します。
 (defun selected-buffer-from-file-p ()
   "現在選択中のバッファがファイルからできているかどうか判別します。"
@@ -292,25 +300,6 @@
   "Return face used at point."
   (interactive)
   (message "%s" (get-char-property (point) 'face)))
-
-(defun load-safe (load-lib)
-  "安全な load です。読み込みに失敗してもそこで止まったりしません。"
-  (let ((load-status (load load-lib t)))
-    (or load-status
-        (message (format "[load-safe] failed %s" load-lib)))
-    load-status))
-
-;;; Fringe
-(setq-default indicate-buffer-boundaries 'left)
-;; 右フリンジの上下にマークをつける
-(setq-default indicate-buffer-boundaries 'right)
-
-;; 左フリンジの上と右フリンジの下にマークをつける
-(setq-default indicate-buffer-boundaries '((top . left) (t . right)))
-;; 右フリンジの上と左フリンジの下にマークをつける
-(setq-default indicate-buffer-boundaries '((top . right) (t . left)))
-;; 右フリンジの上にのみマークをつける
-(setq-default indicate-buffer-boundaries '((top . right) (t . nil)))
 
 
 (provide 'init-global)

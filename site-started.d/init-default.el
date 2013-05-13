@@ -48,17 +48,8 @@
 ;; 行数。
 (require 'init-line-number)
 
-;; Elscreen。
-(require 'init-elscreen)
-
-;; キーバインド。
-(require 'init-keybind)
-
 ;; タイムスタンプ。
 (require 'init-time-stamp)
-
-;; タイムスタンプ。
-(require 'time-stamp)
 
 ;; スクロール。
 (require 'init-scrolling)
@@ -69,6 +60,9 @@
 ;; highlight line。
 (require 'init-hl-line)
 
+;; Elscreen。
+(require 'init-elscreen)
+
 ;; Yasnippet。
 (require 'init-yasnippet)
 
@@ -77,6 +71,9 @@
 
 ;; htmlize 用。
 (require 'init-htmlize)
+
+;; キーバインド。
+(require 'init-keybind)
 
 
 (provide 'init-default)
