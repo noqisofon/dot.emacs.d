@@ -74,15 +74,28 @@
     (set-fontset-font fontset '(#x0370 . #x03FF) ascii-fontspec)     ; ギリシャ文字
     ))
 
-(cond
- ((find-font (font-spec :family "Ricty"))
-  (setting-font "Ricty"))
+(let ((font-name)
+      (after-font-name-list '("Ricty" "TakaoGothic" "IPAGothic" "MS Gothic")))
+  (while (not (null after-font-name-list))
+    ;; x:xs を設定します。
+    (setq font-name (car after-font-name-list)
+          after-font-name-list (cdr after-font-name-list))
+    ;; font-name が存在するかどうか調べます。
+    (if (find-font (font-spec :family font-name))
+      (progn
+        (setting-font font-name)
+        ;; 存在したら、after-font-name-list に nil を設定して終了するようにします。
+        (setq after-font-name-list nil)))))
 
- ((find-font (font-spec :family "TakaoGothic"))
-  (setting-font "TakaoGothic"))
+;; (cond
+;;  ((find-font (font-spec :family ))
+;;   (setting-font "Ricty"))
 
- ((find-font (font-spec :family "IPAGothic"))
-  (setting-font "IPAGothic")))
+;;  ((find-font (font-spec :family ))
+;;   (setting-font "TakaoGothic"))
+
+;;  ((find-font (font-spec :family ))
+;;   (setting-font "IPAGothic")))
 
 ;; デフォルトのフレームパラメータでフォンとセットを指定します。
 ;;(add-to-list 'default-frame-alist '(font . "fontset-takao-gothic"))

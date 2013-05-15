@@ -20,6 +20,10 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
+;; 対応する括弧を色表示します。
+(show-paren-mode t)
+;; 括弧の背景を灰色にします。
+(set-face-background 'show-paren-match-face "gray85")
 
 (setq color-theme-load-all-themes nil)
 (setq color-theme-libraries nil)

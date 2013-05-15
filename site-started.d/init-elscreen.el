@@ -24,6 +24,25 @@
   (require-if-exists elscreen)
   (require-if-exists elscreen-server)
 
+  ;; タブを表示します(非表示にする場合は nil を設定する)。
+  (setq elscreen-display-tab t)
+
+  ;; 自動でスクリーンを作成します。
+  (defmacro elscreen-create-automatically (ad-do-it)
+    `(if (not (elscreen-one-screen-p))
+         ,ad-do-it
+       (elscreen-create)
+       (elscreen-notify-screen-modification 'force-immediately)
+       (elscreen-message "New screen is automatically created")))
+
+  (defadvice elscreen-next (around elscreen-create-automatically activate)
+    (elscreen-create-automatically ad-do-it))
+
+  (defadvice elscreen-previous (around elscreen-create-automatically activate)
+    (elscreen-create-automatically ad-do-it))
+
+  (defadvice elscreen-toggle (around elscreen-create-automatically activate)
+    (elscreen-create-automatically ad-do-it))
 
   (defun elscreen-current-directory ()
     (let* (current-dir

@@ -42,39 +42,8 @@
 ;; 他のソフトで保存した内容を自動的に読み込み直します。
 (global-auto-revert-mode 1)
 
-;; モードラインに行数、カラム数を表示します。
-(line-number-mode t)
-(column-number-mode t)
-
 ;; リージョンを kill-ring に入れないで削除できるようにします。
 (delete-selection-mode t)
-
-;; ツールバーを表示しないようにします。
-(tool-bar-mode -1)
-
-;; 対応する括弧を色表示します。
-(show-paren-mode t)
-;; 括弧の背景を灰色にします。
-(set-face-background 'show-paren-match-face "gray85")
-
-
-;;; Backup file:
-;; バックアップファイルを作成します。
-(setq backup-inhibited nil)
-;; 簡易バージョンコントロール昨日を有効にします。
-(setq version-control t)
-
-(when version-control
-  ;; 新しいものを 12 つまで残すようにします。
-  (setq kept-new-version 12)
-  ;; 古いものを 12 つまで残すようにします。
-  (setq kept-old-version 12)
-  ;; 古いバージョンを消す際、Emacs から尋ねないようにします。
-  (setq delete-old-versions t))
-
-;; 終了時にオートセーブファイルを削除しないようにします。
-(setq delete-auto-save-files nil)
-
 
 ;;; Macros:
 ;; @see http://e-arrows.sakura.ne.jp/2010/03/macros-in-emacs-el.html
@@ -110,13 +79,19 @@
                       '(progn
                         ,@body))))
 
-
 (defun load-safe (load-lib)
   "安全な load です。読み込みに失敗してもそこで止まったりしません。"
   (let ((load-status (load load-lib t)))
     (or load-status
         (message (format "[load-safe] failed %s" load-lib)))
     load-status))
+
+;; via: http://www.sodan.org/~knagano/emacs/dotemacs.html
+;; locate-library してから autoload します。
+(defun autoload-if-found (function file &optional docstring interactive type)
+  "set autoload iff. FILE has found."
+  (and (locate-library file)
+       (autoload function file docstring interactive type)))
 
 ;; 現在選択中のバッファがファイルからできているかどうか判別します。
 (defun selected-buffer-from-file-p ()
@@ -158,6 +133,11 @@
                (message (buffer-name))
                (update-title-caption)))
 
+;; ファイルを保存した時にもタイトルの更新を行うようにします。
+(add-hook 'after-save-hook 'update-title-caption)
+
+;; ファイルを開いた時にもタイトルの更新を行うようにします。
+(add-hook 'find-file-hook 'update-title-caption)
 
 ;;; 自動改行関連:
 ;; 74 文字目くらいで自動的に改行されないようにします。

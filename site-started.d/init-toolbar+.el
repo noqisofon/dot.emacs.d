@@ -20,6 +20,9 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
+;; ツールバーを表示しないようにします。
+(tool-bar-mode -1)
+
 (require-if-exists tool-bar+)
 
 (provide 'init-toolbar+)

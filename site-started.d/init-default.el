@@ -27,23 +27,14 @@
 ;; ディスプレイ。
 (require 'init-display)
 
-;; emacsclient 用。
-(require 'init-emacsclient)
-
-;; auto-insert 用。
-(require 'init-auto-insert)
-
-;; モードライン。
-(require 'init-modeline)
-
 ;; recentf。
 (require 'init-recentf)
 
-;; ;; menu-tree。
-;; (require 'init-menu-tree)
+;; デフォルトのバージョンコントロール機能。
+(require 'init-version-controll)
 
-;; カラーテーマ。
-(require 'init-color-theme)
+;; モードライン。
+(require 'init-modeline)
 
 ;; 行数。
 (require 'init-line-number)
@@ -53,6 +44,18 @@
 
 ;; スクロール。
 (require 'init-scrolling)
+
+;; emacsclient 用。
+(require 'init-emacsclient)
+
+;; auto-insert 用。
+(require 'init-auto-insert)
+
+;; ;; menu-tree。
+;; (require 'init-menu-tree)
+
+;; カラーテーマ。
+(require 'init-color-theme)
 
 ;; セッション。
 (require 'init-session)

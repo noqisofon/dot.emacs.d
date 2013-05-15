@@ -20,10 +20,15 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
+;; モードラインに行数、カラム数を表示します。
+(line-number-mode t)
+(column-number-mode t)
+
 ;; 時刻のフォーマット。
 (setq display-time-string-forms
       '((let ((system-time-locale "C"))
           (format-time-string "%Y-%m-%dT%H:%M"))))
+
 ;; モードラインに現在時刻を表示します。
 (if *meadow-p*
     (display-time)
