@@ -29,6 +29,7 @@
     ;; 23 以上から linum.el が入っているので要りませんが、Meadow3 は 22 なので
     ;; require-if-exists が必要です。
     (require-if-exists linum))
+
 (require-if-exists linum+)
 
 ;; デフォルトで linum-mode を有効にします。

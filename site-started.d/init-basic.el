@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-basic.el -- Emacs init setting elisp file
 
@@ -20,10 +20,7 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(push '("\\.frm$" . visual-basic-mode) auto-mode-alist)
-;(push '("\\.bas$" . visual-basic-mode) auto-mode-alist)
-(push '("\\.vb$" . visual-basic-mode) auto-mode-alist)
-(push '("\\.cls$" . visual-basic-mode) auto-mode-alist)
+(push '("\\.\\(frm\\|bas\\|vb\\|cls\\)$" . visual-basic-mode) auto-mode-alist)
 
 (lazyload (visual-basic-mode) "visual-basic-mode")
 

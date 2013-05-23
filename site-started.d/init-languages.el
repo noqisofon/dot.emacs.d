@@ -104,6 +104,8 @@
 ;; AsciiDoc 用。
 (require 'init-asciidoc)
 
+;; BASIC 用。
+(require 'init-basic)
 
 (provide 'init-languages)
 ;;; init-languages.el ends here
