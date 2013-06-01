@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-display.el -- Emacs init setting elisp file
 
@@ -75,7 +75,7 @@
     ))
 
 (let ((font-name)
-      (after-font-name-list '("Ricty" "TakaoGothic" "IPAGothic" "MS Gothic")))
+      (after-font-name-list '("Ricty" "Migu 1M" "TakaoGothic" "IPAGothic" "MS Gothic")))
   (while (not (null after-font-name-list))
     ;; x:xs を設定します。
     (setq font-name (car after-font-name-list)
