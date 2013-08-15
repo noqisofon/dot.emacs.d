@@ -74,28 +74,22 @@
     (set-fontset-font fontset '(#x0370 . #x03FF) ascii-fontspec)     ; ギリシャ文字
     ))
 
-(let ((font-name)
-      (after-font-name-list '("Ricty" "Migu 1M" "TakaoGothic" "IPAGothic" "MS Gothic")))
-  (while (not (null after-font-name-list))
-    ;; x:xs を設定します。
-    (setq font-name (car after-font-name-list)
-          after-font-name-list (cdr after-font-name-list))
-    ;; font-name が存在するかどうか調べます。
-    (if (find-font (font-spec :family font-name))
-      (progn
-        (setting-font font-name)
-        ;; 存在したら、after-font-name-list に nil を設定して終了するようにします。
-        (setq after-font-name-list nil)))))
+(if (not *macosx-p*)
+    (let ((font-name)
+          (after-font-name-list '("Ricty" "Migu 1M" "TakaoGothic" "IPAGothic" "MS Gothic")))
+      (while (not (null after-font-name-list))
+        ;; x:xs を設定します。
+        (setq font-name (car after-font-name-list)
+              after-font-name-list (cdr after-font-name-list))
+        ;; font-name が存在するかどうか調べます。
+        (if (find-font (font-spec :family font-name))
+            (progn
+              (setting-font font-name)
+              ;; 存在したら、after-font-name-list に nil を設定して終了するようにします。
+              (setq after-font-name-list nil)))))
+  ;; else
+  (set-face-font 'default "fontset-ricty"))
 
-;; (cond
-;;  ((find-font (font-spec :family ))
-;;   (setting-font "Ricty"))
-
-;;  ((find-font (font-spec :family ))
-;;   (setting-font "TakaoGothic"))
-
-;;  ((find-font (font-spec :family ))
-;;   (setting-font "IPAGothic")))
 
 ;; デフォルトのフレームパラメータでフォンとセットを指定します。
 ;;(add-to-list 'default-frame-alist '(font . "fontset-takao-gothic"))
@@ -109,8 +103,6 @@
 ;;                    (".*monaco cy-bold-.*-mac-cyrillic" 0.9)
 ;;                    (".*monaco-bold-.*-mac-roman" 0.9)))
 ;;       (add-to-list 'face-font-rescale-alist elt)))
-
-;;(set-face-font 'default "fontset-takao-gothic")
 
 ;; 行末の空白を表示しません(ウザいので)。
 ;(setq-default show-trailing-whitespace nil)

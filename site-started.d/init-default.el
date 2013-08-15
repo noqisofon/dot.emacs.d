@@ -31,7 +31,7 @@
 (require 'init-recentf)
 
 ;; デフォルトのバージョンコントロール機能。
-(require 'init-version-controll)
+(require 'init-version-control)
 
 ;; モードライン。
 (require 'init-modeline)
