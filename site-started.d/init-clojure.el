@@ -1,6 +1,8 @@
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
+
 ;;; init-clojure.el --- 
 
-;; Copyright (C) 2012  ned rihine
+;; Copyright (C) 2013  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keywords: 
@@ -27,6 +29,30 @@
 
 (require-if-exists clojure-mode)
 
+(require 'nrepl)
+(require 'ac-nrepl)
+
+(add-hook 'nrepl-mode-hook         'ac-nrepl-setup)
+(add-hook 'clojure-nrepl-mode-hook 'ac-nrepl-setup)
+
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'nrepl-mode))
+
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+
+(add-hook 'auto-complete-mode-hook 
+  'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'nrepl-interaction-mode-hook 
+  'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
+
+(defun my-nrepl-mode-setup ()
+  (require 'nrepl-ritz))
 
 (provide 'init-clojure)
 ;;; init-clojure.el ends here
