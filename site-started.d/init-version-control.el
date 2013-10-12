@@ -36,12 +36,13 @@
   ;; 古いものを 12 つまで残すようにします。
   (setq kept-old-version 12)
   ;; 古いバージョンを消す際、Emacs から尋ねないようにします。
-  (setq delete-old-versions t))
+  (setq delete-old-versions t)
+
+  ;; TODO: magit とかも require する。
+  (require 'init-magit))
 
 ;; 終了時にオートセーブファイルを削除しないようにします。
 (setq delete-auto-save-files nil)
-
-;; TODO: magit とかも require する。
 
 (provide 'init-version-control)
 ;;; init-version-control.el ends here

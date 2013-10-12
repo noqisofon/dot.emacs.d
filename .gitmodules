@@ -37,3 +37,9 @@
 [submodule "site-lisp/ritz"]
 	path = site-lisp/ritz
 	url = https://github.com/pallet/ritz.git
+[submodule "site-lisp/clojure-mode"]
+	path = site-lisp/clojure-mode
+	url = https://github.com/clojure-emacs/clojure-mode.git
+[submodule "site-lisp/git-modes"]
+	path = site-lisp/git-modes
+	url = https://github.com/magit/git-modes.git

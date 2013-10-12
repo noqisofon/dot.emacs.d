@@ -36,7 +36,6 @@
              (define-key uim-mode-map [67108896] nil)
              (define-key uim-mode-map [0] nil)))
 
-
 ;; ;; デフォルトの IM を uim 提供のものに設定 (以下は Anthy の例)
 ;; (setq default-input-method "japanese-anthy-uim")
 (setq default-input-method "japanese-mozc-uim")
@@ -74,8 +73,7 @@
 
 ;;   インライン変換候補表示機能をデフォルトで有効にしたい場合は、以下の
 ;;   例のように uim-candidate-display-inline 変数に nil 以外の値を設定します。
-(setq uim-candidate-display-inline t)
-
+(setq uim-candidate-display-inline nil)
 
 (set-face-foreground 'uim-preedit-highlight-face "black")
 (set-face-background 'uim-preedit-highlight-face "blue")
@@ -93,7 +91,6 @@
 
 (set-face-foreground 'uim-candidate-nth-face "red")
 (set-face-background 'uim-candidate-nth-face "white")
-
 
 (uim-mode)
 
