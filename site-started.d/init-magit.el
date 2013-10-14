@@ -22,6 +22,8 @@
 
 (lazyload (magit-status) "magit")
 
+(require-if-exists magit)
+
 (lazyload (git-commmit-mode) "git-commmit-mode")
 (lazyload (git-rebase-mode) "git-rebase-mode")
 (lazyload (gitattributes-mode) "gitattributes-mode")

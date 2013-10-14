@@ -29,8 +29,8 @@
 
 (require-if-exists clojure-mode)
 
-(require 'nrepl)
-(require 'ac-nrepl)
+(require-if-exists  'nrepl)
+(require-if-exists  'ac-nrepl)
 
 (add-hook 'nrepl-mode-hook         'ac-nrepl-setup)
 (add-hook 'clojure-nrepl-mode-hook 'ac-nrepl-setup)
