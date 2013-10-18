@@ -33,12 +33,13 @@
 ;; C-\ でアンドゥできるようにします。
 (global-set-key (kbd "C-\\") 'undo)
 
-;; *** comment/uncomment-regeon
-;; C-x ; でコメントアウト
-;; C-x : でコメントをはずす
-(global-set-key (kbd "C-x ;") 'comment-region)
-(fset 'uncomment-region "\C-u\C-[xcomment-region\C-m")
-(global-set-key (kbd "C-x :") 'uncomment-region)
+;; ;; *** comment/uncomment-regeon
+;; ;; C-x ; でコメントアウト
+;; ;; C-x : でコメントをはずす
+;; (global-set-key (kbd "C-x ;") 'comment-region)
+;; (fset 'uncomment-region "\C-u\C-[xcomment-region\C-m")
+;; (global-set-key (kbd "C-x :") 'uncomment-region)
+(global-set-key (kbd "M-;") 'comment-or-uncomment-region)
 
 ;; Enter キーの代わりに C-m を押すことで自動インデントを行ないます。
 (global-set-key (kbd "C-m") 'newline-and-indent)
