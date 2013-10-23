@@ -23,7 +23,7 @@
 ;; (cond (t
 ;;        (setq menu-tree-coding-system 'utf-8)))
 
-(require 'menu-tree)
+;; (require-if-exists menu-tree)
 
 (provide 'init-menu-tree)
 ;; init-menu-tree.el ends here

@@ -28,9 +28,8 @@
 (push '("\\.clj" . clojure-mode) auto-mode-alist)
 
 (require-if-exists clojure-mode)
-
-(require-if-exists  'nrepl)
-(require-if-exists  'ac-nrepl)
+(require-if-exists nrepl)
+(require-if-exists ac-nrepl)
 
 (add-hook 'nrepl-mode-hook         'ac-nrepl-setup)
 (add-hook 'clojure-nrepl-mode-hook 'ac-nrepl-setup)
