@@ -61,3 +61,9 @@
 [submodule "site-lisp/epl"]
 	path = site-lisp/epl
 	url = https://github.com/cask/epl.git
+[submodule "site-lisp/apel"]
+	path = site-lisp/apel
+	url = http://git.chise.org/git/elisp/apel.git
+[submodule "site-lisp/clojure-snippets"]
+	path = site-lisp/clojure-snippets
+	url = https://github.com/swannodette/clojure-snippets.git

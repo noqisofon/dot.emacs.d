@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-yasnippet.el -- Emacs init setting elisp file
 
@@ -31,6 +31,9 @@
       (push snippet-path yas-snippet-dirs)))
 
 (let ((snippet-path (concat user-emacs-directory "site-lisp/yasnippet/snippets")))
+  (push snippet-path yas-snippet-dirs))
+
+(let ((snippet-path (concat user-emacs-directory "site-lisp/clojure-snippets")))
   (push snippet-path yas-snippet-dirs))
 
 (require-if-exists yasnippet)

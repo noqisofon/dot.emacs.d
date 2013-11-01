@@ -45,6 +45,13 @@
 ;; リージョンを kill-ring に入れないで削除できるようにします。
 (delete-selection-mode t)
 
+;; ログの記録量を増やします。
+(setq message-log-max 100000)
+
+;; 履歴残数を増やします。
+(setq history-length 10000)
+
+
 ;;; Macros:
 ;; @see http://e-arrows.sakura.ne.jp/2010/03/macros-in-emacs-el.html
 (defmacro add-hook-lambda (name &rest body)
