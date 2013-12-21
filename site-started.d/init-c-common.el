@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-c-common.el -- Emacs init setting elisp file
 

@@ -24,88 +24,91 @@
 
 ;;; Code:
 ;; shell script 用。
-(require 'init-shell-script)
+(require-if-exists init-shell-script)
 
 ;; C 言語ファミリー用。
-(require 'init-c-common)
+(require-if-exists init-c-common)
 
 ;; Objective-C 用。
-(require 'init-objc)
+(require-if-exists init-objc)
 
 ;; Smalltalk 用。
-(require 'init-smalltalk)
+(require-if-exists init-smalltalk)
 
 ;; ecmascript 用。
-(require 'init-ecmascript)
+(require-if-exists init-ecmascript)
 
 ;; javacript 用。
-(require 'init-javascript)
+(require-if-exists init-javascript)
 
 ;; vala 用。
-(require 'init-vala)
+(require-if-exists init-vala)
 
 ;; C# 用。
-(require 'init-csharp)
+(require-if-exists init-csharp)
+
+;; Nemerle 用。
+(require-if-exists init-nemerle)
 
 ;; D 用。
-(require 'init-d)
+(require-if-exists init-d)
 
 ;; Ruby 用。
-(require 'init-ruby)
+(require-if-exists init-ruby)
 
 ;; Scala 用。
-(require 'init-scala)
+(require-if-exists init-scala)
 
 ;; clojure 用。
-(require 'init-clojure)
+(require-if-exists init-clojure)
 
 ;; org-mode 用。
-(require 'init-org-mode)
+(require-if-exists init-org-mode)
 
 ;; SGML 用。
-(require 'init-sgml)
+(require-if-exists init-sgml)
 
 ;; CMake 用。
-(require 'init-cmake)
+(require-if-exists init-cmake)
 
 ;; markdown 用。
-(require 'init-markdown)
+(require-if-exists init-markdown)
 
 ;; yaml 用。
-(require 'init-yaml)
+(require-if-exists init-yaml)
 
 ;; haml 用。
-(require 'init-haml)
+(require-if-exists init-haml)
 
 ;; sass 用。
-(require 'init-sass)
+(require-if-exists init-sass)
 
 ;; less 用。
-(require 'init-less)
+(require-if-exists init-less)
 
 ;; coffeescript 用。
-(require 'init-coffee)
+(require-if-exists init-coffee)
 
 ;; zencoding 用。
-(require 'init-zencoding)
+(require-if-exists init-zencoding)
 
 ;; eldoc。
-(require 'init-eldoc)
+(require-if-exists init-eldoc)
 
 ;; C 用の eldoc。
-(require 'init-c-eldoc)
+(require-if-exists init-c-eldoc)
 
 ;; Git 用。
-(require 'init-magit)
+(require-if-exists init-magit)
 
 ;; Haskell 用。
-(require 'init-haskell)
+(require-if-exists init-haskell)
 
 ;; AsciiDoc 用。
-(require 'init-asciidoc)
+(require-if-exists init-asciidoc)
 
 ;; BASIC 用。
-(require 'init-basic)
+(require-if-exists init-basic)
 
 (provide 'init-languages)
 ;;; init-languages.el ends here

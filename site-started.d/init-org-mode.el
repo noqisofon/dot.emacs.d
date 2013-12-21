@@ -1,4 +1,4 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-org-mode.el -- Emacs init setting elisp file
 
@@ -41,27 +41,11 @@
                    (set-face-foreground 'org-level-5 "#6a40ad")
                    (set-face-foreground 'org-level-6 "#8c3e13")
 
+                   (set-face-foreground 'org-document-title "midnight blue")
+
                    (set-face-attribute 'org-document-title nil
                                        :height 1.0
                                        :weight 'bold))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(display-time-mode t)
- '(session-use-package t nil (session))
- '(show-paren-mode t)
- '(tool-bar-mode nil))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-document-title ((((class color) (background light)) (:foreground "midnight blue" :weight bold :height 1.0)))))
 
 (provide 'init-org-mode)
 ;; init-org-mode.el ends here
