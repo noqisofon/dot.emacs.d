@@ -36,6 +36,9 @@
 ;; モードライン。
 (require 'init-modeline)
 
+;; ツールバー。
+(require 'init-toolbar+)
+
 ;; 行数。
 (require 'init-line-number)
 

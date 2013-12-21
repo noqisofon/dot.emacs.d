@@ -51,13 +51,11 @@
 ;; 履歴残数を増やします。
 (setq history-length 10000)
 
-
 ;;; Macros:
 ;; @see http://e-arrows.sakura.ne.jp/2010/03/macros-in-emacs-el.html
 (defmacro add-hook-lambda (name &rest body)
   "lambda を書かずに、/'.*/ の次の引数に関数をズラズラ書けます。"
   `(add-hook ,name #'(lambda () ,@body)))
-
 
 (defmacro global-set-key-lambda (key args &rest body)
   "lambda を書かずに関数をそのまま書くことができる global-set-key です。"
@@ -235,8 +233,6 @@
       ;; else
       selected-buffer-filename)))
 
-
-
 ;; テンポラリバッファを作成し、それをウィンドウに表示します。
 (defun create-temporary-buffer ()
   "テンポラリバッファを作成し、それをウィンドウに表示します。"
@@ -280,14 +276,12 @@
                       (unless (member "*scratch*" (bookshelf-buffer-name-list))
                         (bookshelf-make-scratch 1)))))
 
-
 ;; カーソル位置のフェースを調べる関数です。
 ;; (via: http://d.hatena.ne.jp/whitypig/20090401/1238553652)
 (defun describe-face-at-point ()
   "Return face used at point."
   (interactive)
   (message "%s" (get-char-property (point) 'face)))
-
 
 (provide 'init-global)
 ;; init-global.el ends here
