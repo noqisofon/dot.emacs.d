@@ -24,7 +24,7 @@
 
 ;;; Code:
 ;; どんな OS でも共通の設定。
-(require 'init-default)
+(require 'init-infrastructure)
 
 ;; プログラム言語や、マークアップ言語用の設定。
 (require 'init-languages)

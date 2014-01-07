@@ -1,4 +1,4 @@
-;;; init-default.el --- 
+;;; init-infrastructure.el --- 
 
 ;; Copyright (C) 2013  ned rihine
 
@@ -81,6 +81,5 @@
 ;; キーバインド。
 (require 'init-keybind)
 
-
-(provide 'init-default)
-;;; init-default.el ends here
+(provide 'init-infrastructure)
+;;; init-infrastructure.el ends here
