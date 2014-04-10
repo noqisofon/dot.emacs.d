@@ -62,6 +62,9 @@
 ;; clojure 用。
 (require-if-exists init-clojure)
 
+;; scheme 用。
+(require-if-exists init-scheme)
+
 ;; org-mode 用。
 (require-if-exists init-org-mode)
 
