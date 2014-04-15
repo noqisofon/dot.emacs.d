@@ -1,9 +1,9 @@
-;;; init-scheme.el --- 
+;;; init-lisp-common.el --- 
 
 ;; Copyright (C) 2014  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
-;; Keywords: tools
+;; Keywords: extensions, languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,16 +23,13 @@
 ;; 
 
 ;;; Code:
-(setq quack-default-program "gosh")
 
-(require-if-exists quack)
-(require-if-exists scheme-complete)
+;; Lisp の括弧内のインデントです。
+(setq lisp-body-indent 2)
 
-(add-hook 'scheme-mode-hook (lambda ()
-                              (make-local-variable 'eldoc-documentation-function)
-                              (setq lisp-indent-function 'scheme-smart-indent-function)
-                              (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-                              (eldoc-mode)))
+(add-hook 'lisp-mode-hook (lambda ()
+                            (set (make-local-variable 'lisp-indent-function)
+                                 'common-lisp-indent-function)))
 
-(provide 'init-scheme)
-;;; init-scheme.el ends here
+(provide 'init-lisp-common)
+;;; init-lisp-common.el ends here

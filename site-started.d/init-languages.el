@@ -29,6 +29,9 @@
 ;; C 言語ファミリー用。
 (require-if-exists init-c-common)
 
+;; Lisp ファミリー用。
+(require-if-exists init-lisp-common)
+
 ;; Objective-C 用。
 (require-if-exists init-objc)
 
