@@ -59,5 +59,7 @@
 ;; 最近使ったファイルを別のバッファ領域に表示します。
 (define-key global-map (kbd "C-c r") 'recentf-open-files)
 
+(global-set-key (kbd "<zenkaku-hankaku>") 'uim-mode)
+
 (provide 'init-keybind)
 ;; init-keybind.el ends here

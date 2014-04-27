@@ -1,7 +1,7 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 ;;; init-uim.el --- 
 
-;; Copyright (C) 2013  ned rihine
+;; Copyright (C) 2013-2014  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keywords: tools
@@ -24,7 +24,8 @@
 ;; 
 
 ;;; Code:
-(require-if-exists uim)
+
+(setq default-input-method "japanese-mozc-uim")
 
 ;; Emacs 上で C-SPC が IM の入力モードの切り替えに使われてしまうのを抑止する
 ;; =============================================================================
@@ -38,9 +39,9 @@
 
 ;; ;; デフォルトの IM を uim 提供のものに設定 (以下は Anthy の例)
 ;; (setq default-input-method "japanese-anthy-uim")
-(setq default-input-method "japanese-mozc-uim")
 
-(global-set-key (kbd "<zenkaku-hankaku>") 'uim-mode)
+;; init-keybind.el に移動しました。
+;;(global-set-key (kbd "<zenkaku-hankaku>") 'uim-mode)
 
 
 ;; 普通のカスタマイズ
@@ -54,8 +55,8 @@
 ;;   もし、uim 全体の設定とは異なるIMをデフォルトで利用したければ、
 ;;   uim-default-im-engine 変数にそのIM名を設定して下さい。例えば
 ;;   uim-anthy をデフォルトで利用したければ、以下を記述します。
-;;(setq uim-default-im-engine "anthy")
-(setq uim-default-im-engine "mozc")
+;; (setq uim-default-im-engine "anthy")
+;; (setq uim-default-im-engine "mozc")
 
 
 ;; * インライン変換候補表示機能をデフォルトで有効にする
@@ -75,24 +76,25 @@
 ;;   例のように uim-candidate-display-inline 変数に nil 以外の値を設定します。
 (setq uim-candidate-display-inline nil)
 
-(set-face-foreground 'uim-preedit-highlight-face "black")
-(set-face-background 'uim-preedit-highlight-face "blue")
+;; (set-face-foreground 'uim-preedit-highlight-face "black")
+;; (set-face-background 'uim-preedit-highlight-face "blue")
 
-(set-face-foreground 'uim-separator-face "blue")
+;; (set-face-foreground 'uim-separator-face "blue")
 
-(set-face-foreground 'uim-candidate-odd-face "blue")
-(set-face-background 'uim-candidate-odd-face "white")
+;; (set-face-foreground 'uim-candidate-odd-face "blue")
+;; (set-face-background 'uim-candidate-odd-face "white")
 
-(set-face-foreground 'uim-candidate-even-face "blue")
-(set-face-background 'uim-candidate-even-face "yellow")
+;; (set-face-foreground 'uim-candidate-even-face "blue")
+;; (set-face-background 'uim-candidate-even-face "yellow")
 
-(set-face-foreground 'uim-candidate-selected-face "blue")
-(set-face-background 'uim-candidate-selected-face "white")
+;; (set-face-foreground 'uim-candidate-selected-face "blue")
+;; (set-face-background 'uim-candidate-selected-face "white")
 
-(set-face-foreground 'uim-candidate-nth-face "red")
-(set-face-background 'uim-candidate-nth-face "white")
+;; (set-face-foreground 'uim-candidate-nth-face "red")
+;; (set-face-background 'uim-candidate-nth-face "white")
 
-(uim-mode)
+;; (require-if-exists uim)
+(lazyload (uim-mode) "uim")
 
 (provide 'init-uim)
 ;;; init-uim.el ends here

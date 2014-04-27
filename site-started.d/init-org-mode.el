@@ -27,7 +27,6 @@
                    (setq org-startup-truncated nil)
                    (setq org-return-follows-link t)
                    ;;(org-remember-insinuate)
-                   (setq org-export-default-language "ja")
                    (setq org-default-notes-file (concat org-directory "/agenda.org"))
                    (setq org-remember-templates
                          '(("Todo" ?t "** TODO %?\n   %i\n   %a\n   %t" nil "Inbox")
@@ -45,7 +44,9 @@
 
                    (set-face-attribute 'org-document-title nil
                                        :height 1.0
-                                       :weight 'bold))
+                                       :weight 'bold)
+
+                   (setq-default org-export-default-language "ja"))
 
 (provide 'init-org-mode)
 ;; init-org-mode.el ends here

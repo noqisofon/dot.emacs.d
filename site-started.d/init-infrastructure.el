@@ -54,6 +54,9 @@
 ;; auto-insert 用。
 (require 'init-auto-insert)
 
+;; magit、または git 用。
+(require 'init-magit)
+
 ;; ;; menu-tree。
 ;; (require 'init-menu-tree)
 

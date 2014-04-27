@@ -107,8 +107,8 @@
   (and *xemacs-p* (not (featurep 'mule))))
 
 ;; 日本語環境を指定します。
-;;(set-language-environment "Japanese")
-(set-language-environment "utf-8")
+(set-language-environment "Japanese")
+;; (set-language-environment "utf-8")
 
 ;;; Char code:
 (if *windows-p*
@@ -174,7 +174,7 @@
          (nth 2 li)))
 
 ;; 起動時間を計測します。
-(when *emacs23-p*
+(when (or *emacs23-p* *emacs24-p*)
   (defun present-startup-time ()
     (message "Emacs loaded in %d ms."
              (/ (- (+ (third after-init-time) (* 1000000 (second after-init-time)))

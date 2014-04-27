@@ -23,17 +23,23 @@
 ;; 
 
 ;;; Code:
-(case (getenv "XIM")
-  ("ibus"
-   ;; ibus 用。
-   (require 'init-ibus))
 
-  ("uim"
-   ;; uim 用。
-   (require 'init-uim)))
+;; (case (getenv "XIM")
+;;   ("ibus"
+;;    ;; ibus 用。
+;;    (require 'init-ibus))
 
-;; mozc 用。
-(require 'init-mozc)
+;;   ("uim"
+;;    ;; uim 用。
+;;    (require 'init-uim)))
+(let ((xim (getenv "XIM")))
+  (cond ((equal xim "ibus")
+         (require 'init-ibus))
+        ((equal xim "uim")
+         (require 'init-uim))))
+
+;; ;; mozc 用。
+;; (require 'init-mozc)
 
 
 (provide 'init-input-method)

@@ -23,14 +23,14 @@
 
 (setq x-select-enable-clipboard t)
 
+;; インプットメソッド。
+(require 'init-input-method)
+
 ;; どんな OS でも共通の設定。
 (require 'init-infrastructure)
 
 ;; プログラム言語や、マークアップ言語用の設定。
 (require 'init-languages)
-
-;; インプットメソッド。
-(require 'init-input-method)
 
 
 (provide 'init-unix-like)
