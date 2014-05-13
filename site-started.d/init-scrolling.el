@@ -30,30 +30,30 @@
   (column-number-mode 15))
 
 ;; スクロール行単位を 1 行にします。
-(setq-default scroll-step 1)
+(setq scroll-step 1)
 ;; 画面をはみ出す場合に 1 行だけスクロールするようにします。
-(setq-default scroll-conservatively 1)
+(setq scroll-conservatively 1)
 ;; カーソルを一番上か一番下まで持っていけます。
-(setq-default scroll-margin 0)
+(setq scroll-margin 0)
 ;;
 ;; カーソルが右端、もしくは左端からはみ出したときに自動で横方向にスクロールします。
-(setq-default truncate-lines t)
+(setq truncate-lines t)
 ;; カーソルがどのくらいまで窓の端に近づいたらスクロールするかを指定します。
-;(setq-default hscroll-margin 0)
+;(setq hscroll-margin 0)
 ;; スクロールの際にどの程度スクロールさせるかを指定します。
-;(setq-default hscroll-step-percent 1)
+;(setq hscroll-step-percent 1)
 
 ;; 10 回毎に加速します。
-(defvar scroll-speedup-count 10)
+(setq scroll-speedup-count 10)
 ;; 10 回下カーソルを入力すると次回からは 1 + 1 で 2 行ずつの移動になります。
-(defvar scroll-speedup-rate 1)
+(setq scroll-speedup-rate 1)
 ;; 800ms 経過したら通常のスクロールに戻します。
-(defvar scroll-speedup-time 800)
+(setq scroll-speedup-time 800)
 
 ;; 以下、内部変数がお送りします。
-(defvar scroll-step-default 1)
-(defvar scroll-step-count 1)
-(defvar scroll-speedup-zero (current-time))
+(setq scroll-step-default 1)
+(setq scroll-step-count 1)
+(setq scroll-speedup-zero (current-time))
 ;; 内部変数がお送りしました。
 
 ;; via: http://www.bookshelf.jp/soft/meadow_31.html
@@ -92,7 +92,7 @@
 (defadvice next-line
   (around next-line-speedup activate)
   (if (and (string= last-command 'next-line)
-           (interactive-p))
+           (called-interactively-p nil))
       (progn
         (scroll-speedup-setspeed)
         (condition-case err
@@ -114,7 +114,7 @@
   (around previous-line-speedup activate)
   (if (and
        (string= last-command 'previous-line)
-       (interactive-p))
+       (called-interactively-p nil))
       (progn
         (scroll-speedup-setspeed)
         (scroll-speedup-next-line 'previous))

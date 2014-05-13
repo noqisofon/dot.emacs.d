@@ -3,7 +3,8 @@
 \#*#
 
 *.elc
-
+.org-id-locations
+session.*
 tramp
 
 auto-save-list/

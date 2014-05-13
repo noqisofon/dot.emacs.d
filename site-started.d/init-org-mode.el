@@ -21,18 +21,23 @@
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
 (setq org-directory "~/var/memo")
+
+(setq org-html-doctype "html5")
+
+(setq org-export-default-language "ja")
+
+(setq org-startup-truncated nil)
+(setq org-return-follows-link t)
+;;(org-remember-insinuate)
+(setq org-default-notes-file (concat org-directory "/agenda.org"))
+(setq org-remember-templates
+      '(("Todo" ?t "** TODO %?\n   %i\n   %a\n   %t" nil "Inbox")
+        ("Bug" ?b "** TODO %?   :bug:\n   %i\n   %a\n   %t" nil "Inbox")
+        ("Idea" ?i "** %?\n   %i\n   %a\n   %t" nil "New Ideas")))
+
 (push '("\\.org$" . org-mode) auto-mode-alist)
 
-(require-if-exists org-mode
-                   (setq org-startup-truncated nil)
-                   (setq org-return-follows-link t)
-                   ;;(org-remember-insinuate)
-                   (setq org-default-notes-file (concat org-directory "/agenda.org"))
-                   (setq org-remember-templates
-                         '(("Todo" ?t "** TODO %?\n   %i\n   %a\n   %t" nil "Inbox")
-                           ("Bug" ?b "** TODO %?   :bug:\n   %i\n   %a\n   %t" nil "Inbox")
-                           ("Idea" ?i "** %?\n   %i\n   %a\n   %t" nil "New Ideas")))
-
+(require-if-exists org
                    (set-face-foreground 'org-level-1 "#7fb000")
                    (set-face-foreground 'org-level-2 "#7f9142")
                    (set-face-foreground 'org-level-3 "#00379c")
@@ -44,9 +49,7 @@
 
                    (set-face-attribute 'org-document-title nil
                                        :height 1.0
-                                       :weight 'bold)
-
-                   (setq-default org-export-default-language "ja"))
+                                       :weight 'bold))
 
 (provide 'init-org-mode)
 ;; init-org-mode.el ends here

@@ -68,7 +68,8 @@
 (defmacro require-if-exists (library &rest body)
   "ライブラリがあったら require します。"
   `(when (locate-library ,(symbol-name library))
-     (require ',library) ,@body))
+     (require ',library)
+     ,@body))
 
 (defmacro eval-safe (&rest body)
   "安全な評価です。評価に失敗してもそこで止まったりしません。"
@@ -131,12 +132,12 @@
 ;; 現在は meadow 用に update-title-caption 関数を定義していますが、
 ;; 他の Emacen では定義していないので、ガード句でくるんでいます。
 ;; meadow 以外でも同じようにしたい場合は 同じ名前の関数を定義してください。
-(if (fboundp 'update-title-caption)
-    ;; switch-to-buffer の後に frame-title-format の値を更新します。
-    (defadvice switch-to-buffer
-               (after switch-to-buffer-after-update-the-title-captions first () activate)
-               (message (buffer-name))
-               (update-title-caption)))
+(when (fboundp 'update-title-caption)
+  ;; switch-to-buffer の後に frame-title-format の値を更新します。
+  (defadvice switch-to-buffer
+    (after switch-to-buffer-after-update-the-title-captions first () activate)
+    (message (buffer-name))
+    (update-title-caption)))
 
 ;; ファイルを保存した時にもタイトルの更新を行うようにします。
 (add-hook 'after-save-hook 'update-title-caption)

@@ -107,8 +107,8 @@
   (and *xemacs-p* (not (featurep 'mule))))
 
 ;; 日本語環境を指定します。
-(set-language-environment "Japanese")
-;; (set-language-environment "utf-8")
+;; (set-language-environment "Japanese")
+(set-language-environment "utf-8")
 
 ;;; Char code:
 (if *windows-p*
