@@ -67,3 +67,6 @@
 [submodule "site-lisp/clojure-snippets"]
 	path = site-lisp/clojure-snippets
 	url = https://github.com/swannodette/clojure-snippets.git
+[submodule "site-lisp/emmet-mode"]
+	path = site-lisp/emmet-mode
+	url = https://github.com/smihica/emmet-mode.git

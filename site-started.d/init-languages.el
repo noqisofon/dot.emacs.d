@@ -116,5 +116,8 @@
 ;; BASIC 用。
 (require-if-exists init-basic)
 
+;; Rust 用
+(require-if-exists init-rust)
+
 (provide 'init-languages)
 ;;; init-languages.el ends here

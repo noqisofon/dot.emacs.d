@@ -1,8 +1,8 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-zencoding.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2014 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools
@@ -20,10 +20,14 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(require-if-exists zencoding-mode
-                   (add-hook 'sgml-mode-hook 'zencoding-mode)
-                   (add-hook 'html-mode-hook 'zencoding-mode)
-                   (add-hook 'text-mode-hook 'zencoding-mode))
+;; (require-if-exists zencoding-mode
+;;                    (add-hook 'sgml-mode-hook 'zencoding-mode)
+;;                    (add-hook 'html-mode-hook 'zencoding-mode)
+;;                    (add-hook 'text-mode-hook 'zencoding-mode))
+(require-if-exists emmet-mode
+                   (add-hook 'sgml-mode-hook 'emmet-mode)
+                   (add-hook 'html-mode-hook 'emmet-mode)
+                   (add-hook 'text-mode-hook 'emmet-mode))
 
 (provide 'init-zencoding)
 ;; init-zencoding.el ends here
