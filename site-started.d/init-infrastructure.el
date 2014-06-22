@@ -78,6 +78,9 @@
 ;; anything 用。
 (require 'init-anything)
 
+;; Slime。
+(require 'init-slime)
+
 ;; htmlize 用。
 (require 'init-htmlize)
 

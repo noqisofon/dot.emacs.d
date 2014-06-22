@@ -1,8 +1,8 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-anything.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2014 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools
@@ -22,19 +22,33 @@
 
 (defvar org-directory "")
 
-(require-if-exists anything-config
-                   (setq anything-sources (list anything-c-source-buffers
-                                                anything-c-source-bookmarks
-                                                anything-c-source-recentf
-                                                anything-c-source-file-name-history
-                                                anything-c-source-locate))
+;; (require-if-exists anything-config
+;;                    (setq anything-sources (list anything-c-source-buffers
+;;                                                 anything-c-source-bookmarks
+;;                                                 anything-c-source-recentf
+;;                                                 anything-c-source-file-name-history
+;;                                                 anything-c-source-locate))
 
-                   (define-key anything-map (kbd "C-p") 'anything-previous-line)
-                   (define-key anything-map (kbd "C-n") 'anything-next-line)
-                   (define-key anything-map (kbd "C-v") 'anything-next-source)
-                   (define-key anything-map (kbd "M-v") 'anything-previous-source)
+;;                    (define-key anything-map (kbd "C-p") 'anything-previous-line)
+;;                    (define-key anything-map (kbd "C-n") 'anything-next-line)
+;;                    (define-key anything-map (kbd "C-v") 'anything-next-source)
+;;                    (define-key anything-map (kbd "M-v") 'anything-previous-source)
 
-                   (global-set-key (kbd "C-;") 'anything))
+;;                    (global-set-key (kbd "C-;") 'anything))
+(require-if-exists helm-config
+                   (helm-mode 1)
+
+                   (define-key global-map (kbd "M-x")     'helm-M-x)
+                   (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+                   (define-key global-map (kbd "C-x C-r") 'helm-recentf)
+                   (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
+                   (define-key global-map (kbd "C-c i")   'helm-imenu)
+                   (define-key global-map (kbd "C-x b")   'helm-buffers-list)
+
+                   (define-key helm-map (kbd "C-h") 'delete-backward-char)
+                   (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
+                   (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+                   (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action))
 
 (provide 'init-anything)
 ;; init-anything.el ends here

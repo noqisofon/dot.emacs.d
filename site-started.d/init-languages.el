@@ -119,5 +119,8 @@
 ;; Rust 用
 (require-if-exists init-rust)
 
+;; Dart 用
+(require-if-exists init-dart)
+
 (provide 'init-languages)
 ;;; init-languages.el ends here
