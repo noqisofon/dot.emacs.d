@@ -23,9 +23,11 @@
 ;; 
 
 ;;; Code:
-(setq quack-default-program "gosh")
+(setq quack-default-program "csi")
 
-(require-if-exists quack)
+;; (require-if-exists quack)
+(require-if-exists cluck)
+(require-if-exists chicken)
 (require-if-exists scheme-complete)
 
 (add-hook 'scheme-mode-hook (lambda ()
