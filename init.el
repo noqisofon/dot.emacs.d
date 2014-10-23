@@ -2,7 +2,7 @@
 
 ;; init.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2014 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools
@@ -106,45 +106,9 @@
 (defvar *xemacs-no-mule-p*
   (and *xemacs-p* (not (featurep 'mule))))
 
-;; 日本語環境を指定します。
-;; (set-language-environment "Japanese")
-(set-language-environment "utf-8")
 
-;;; Char code:
-(if *windows-p*
-    (let ((default-coding 'japanese-shift-jis-dos)
-          (clipboard-coding 'utf-16le-dos))
-      ;; 
-      (if (fboundp 'set-w32-system-coding-system)
-          (set-w32-system-coding-system default-coding))
-      ;; デフォルトの文字コードです。
-      (if (fboundp 'set-default-coding-system)
-          (set-default-coding-system default-coding))
-      ;; 端末の文字コードです。
-      (set-terminal-coding-system default-coding)
-      ;; Windows NT の内部文字コードは UTF-16LE なので、クリップボードのエンコードを utf-16le-dos にしておきます。
-      (set-clipboard-coding-system clipboard-coding)
-      ;; 通常キーボードを使用して打つ文字です。
-      (set-keyboard-coding-system default-coding)
-      ;; 新規作成するバッファのエンコードです。
-      (prefer-coding-system default-coding))
-  ;; else
-  (let ((default-coding 'utf-8-unix))
-    (if (fboundp 'set-default-coding-system)
-        (set-default-coding-system default-coding))
-    (set-terminal-coding-system default-coding)
-    (if (fboundp 'set-clipboard-codng-system)
-        (set-clipboard-codng-system default-coding))
-    (if (fboundp 'prefer-coding-system-coding)
-        (prefer-coding-system-coding default-coding))))
-;; (cond
-;;  (*windows-nt-p*
-;;   (setq file-name-coding-system 'sjis)
-;;   (setq locale-coding-system 'utf-8))
-;;  (t
-;;   (setq file-name-coding-system 'utf-8)
-;;   (setq locale-coding-system 'utf-8)))
-
+;; 全環境共通設定を読み込みます。
+(require 'init-locale)
 ;; 全環境共通設定を読み込みます。
 (require 'init-global)
 
@@ -181,18 +145,3 @@
                    (+ (third before-init-time) (* 1000000 (second before-init-time))))
                 1000)))
   (add-hook 'after-init-hook 'present-startup-time))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
- '(quack-fontify-style nil)
- '(session-use-package t nil (session)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

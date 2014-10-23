@@ -25,7 +25,6 @@
 
 ;;; Code:
 
-(setq default-input-method "japanese-mozc-uim")
 
 ;; Emacs 上で C-SPC が IM の入力モードの切り替えに使われてしまうのを抑止する
 ;; =============================================================================
@@ -39,6 +38,7 @@
 
 ;; ;; デフォルトの IM を uim 提供のものに設定 (以下は Anthy の例)
 ;; (setq default-input-method "japanese-anthy-uim")
+(setq default-input-method "japanese-mozc-uim")
 
 ;; init-keybind.el に移動しました。
 ;;(global-set-key (kbd "<zenkaku-hankaku>") 'uim-mode)
@@ -56,7 +56,7 @@
 ;;   uim-default-im-engine 変数にそのIM名を設定して下さい。例えば
 ;;   uim-anthy をデフォルトで利用したければ、以下を記述します。
 ;; (setq uim-default-im-engine "anthy")
-;; (setq uim-default-im-engine "mozc")
+(setq uim-default-im-engine "mozc")
 
 
 ;; * インライン変換候補表示機能をデフォルトで有効にする

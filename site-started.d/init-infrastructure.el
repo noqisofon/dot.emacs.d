@@ -54,6 +54,9 @@
 ;; auto-insert 用。
 (require 'init-auto-insert)
 
+;; auto-complete
+(require 'init-auto-complete)
+
 ;; magit、または git 用。
 (require 'init-magit)
 

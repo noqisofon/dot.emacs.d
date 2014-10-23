@@ -1,9 +1,9 @@
-;;; init-scheme.el --- 
+;;; init-auto-complete.el --- 
 
 ;; Copyright (C) 2014  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
-;; Keywords: tools
+;; Keywords: 
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,19 +23,10 @@
 ;; 
 
 ;;; Code:
-(setq quack-default-program "csi")
+(require-if-exists auto-complete)
 
-(require-if-exists quack)
-;; (require-if-exists cluck)
-(require-if-exists chicken)
-(require-if-exists scheme-complete)
+(ac-config-default)
 
-(add-hook 'scheme-mode-hook (lambda ()
-                              (make-local-variable 'eldoc-documentation-function)
-                              (setq lisp-indent-function 'scheme-smart-indent-function)
-                              ;; (setq lisp-body-indent 4)
-                              (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-                              (eldoc-mode)))
 
-(provide 'init-scheme)
-;;; init-scheme.el ends here
+(provide 'init-auto-complete)
+;;; init-auto-complete.el ends here

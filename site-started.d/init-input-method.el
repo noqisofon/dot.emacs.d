@@ -1,6 +1,6 @@
 ;;; init-input-method.el --- 
 
-;; Copyright (C) 2013  ned rihine
+;; Copyright (C) 2013-2013  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keywords: tools
@@ -23,24 +23,14 @@
 ;; 
 
 ;;; Code:
-
-;; (case (getenv "XIM")
-;;   ("ibus"
-;;    ;; ibus 用。
-;;    (require 'init-ibus))
-
-;;   ("uim"
-;;    ;; uim 用。
-;;    (require 'init-uim)))
 (let ((xim (getenv "XIM")))
   (cond ((equal xim "ibus")
+         ;; ibus 用。
          (require 'init-ibus))
+
         ((equal xim "uim")
+         ;; uim 用。
          (require 'init-uim))))
-
-;; ;; mozc 用。
-;; (require 'init-mozc)
-
 
 (provide 'init-input-method)
 ;;; init-input-method.el ends here

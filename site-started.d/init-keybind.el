@@ -2,7 +2,7 @@
 
 ;; init-keybind.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2014 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools
