@@ -95,6 +95,9 @@
 ;; coffeescript 用。
 (require-if-exists init-coffee)
 
+;; PHP 用
+(require-if-exists init-php)
+
 ;; zencoding 用。
 (require-if-exists init-zencoding)
 

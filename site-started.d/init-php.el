@@ -1,9 +1,9 @@
-;;; init-input-method.el --- 
+;;; init-php.el ---                                  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2013-2013  ned rihine
+;; Copyright (C) 2014  ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
-;; Keywords: tools
+;; Keywords: 
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,15 +23,13 @@
 ;; 
 
 ;;; Code:
-;; (let ((xim (getenv "XIM")))
-;;   (cond ((equal xim "ibus")
-;;          ;; ibus 用。
-;;          (require 'init-ibus))
+(lazyload (php-mode) "php-mode")
 
-;;         ((equal xim "uim")
-;;          ;; uim 用。
-;;          (require 'init-uim))))
-(require 'init-mozc)
+;; ruby モード。
+(push '("\\.php$" . php-mode) auto-mode-alist)
 
-(provide 'init-input-method)
-;;; init-input-method.el ends here
+;; (add-hook 'php-mode-hook (lambda ()
+;;                            (php-enable-wordpress-coding-style)))
+
+(provide 'init-php)
+;;; init-php.el ends here
