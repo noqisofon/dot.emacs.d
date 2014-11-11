@@ -1,8 +1,8 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-vala.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2014 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools

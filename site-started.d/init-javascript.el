@@ -1,8 +1,8 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-javascript.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2014 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools
@@ -20,14 +20,14 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http:;;www.gnu.org/licenses/>.
 
-(require-if-exists espresso)
-(autoload 'js2-mode "js2-mode" nil t)
+(require-if-exists js)
+(lazyload (js2-mode) "js2-mode")
 
 ;;(delete (cons "\\.js$" 'js-mode) auto-mode-alist)
 (push '("\\.js$" . js2-mode) auto-mode-alist)
 
 (add-hook-lambda 'js2-mode-hook
-                 (setq espresso-indent-level 4
+                 (setq js-indent-level 4
                        ;; 保存時に行末の空白を削除しません。
                        js2-cleanup-white-space nil
                        ;; 開き括弧の入力の際に、閉じ括弧を自動で入力しません。

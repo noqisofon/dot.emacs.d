@@ -1,8 +1,8 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-unix; indent-tabs-mode: nil; -*-
+;;; -*- mode: emacs-lisp; coding: utf-8; indent-tabs-mode: nil; -*-
 
 ;; init-csharp.el -- Emacs init setting elisp file
 
-;; Copyright (c) 2009-2012 ned rihine
+;; Copyright (c) 2009-2014 ned rihine
 
 ;; Author: ned rihine <ned.rihine@gmail.com>
 ;; Keyword: tools
@@ -20,9 +20,15 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+
+;; 
+
+;;; Code:
 ;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 ;; csharp-mode はクソなので、vala-mode を使用します。
 (require-if-exists vala-mode)
+
 (push '("\\.cs$" . vala-mode) auto-mode-alist)
 
 (provide 'init-csharp)

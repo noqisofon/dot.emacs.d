@@ -25,8 +25,8 @@
 ;;; Code:
 (require-if-exists auto-complete)
 
-(ac-config-default)
-
+(when (fboundp 'ac-config-default)
+  (ac-config-default))
 
 (provide 'init-auto-complete)
 ;;; init-auto-complete.el ends here
